@@ -10,8 +10,29 @@ Pod::Spec.new do |s|
     s.source       = { :git => "https://github.com/CCSH/SHExtension.git", :tag => s.version }
     s.source_files = "SHExtension/*.{h,m}"
 
+    #部分功能
     s.subspec 'NSString+SHExtension' do |ns|
         ns.source_files = "SHExtension/NSString+SHExtension.{h,m}"
+    end
+
+    s.subspec 'UIButton+SHExtension' do |btn|
+        btn.source_files = "SHExtension/UIButton+SHExtension.{h,m}"
+    end
+
+    s.subspec 'UIColor+SHExtension' do |color|
+        color.source_files = "SHExtension/UIColor+SHExtension.{h,m}"
+    end
+
+    s.subspec 'UIImage+SHExtension' do |img|
+        img.source_files = "SHExtension/UIImage+SHExtension.{h,m}"
+    end
+
+    s.subspec 'UIImageViewSHExtension' do |imgv|
+        imgv.source_files = "SHExtension/UIImageView+SHExtension.{h,m}"
+    end
+
+    s.subspec 'UIView+SHExtension' do |view|
+        view.source_files = "SHExtension/UIView+SHExtension.{h,m}"
     end
 
 end
