@@ -21,10 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-    UIImageView *imgView = [[UIImageView alloc] initWithImage:[UIImage getImageWithSize:CGSizeMake(300, 50) colorArr:@[(__bridge id)[UIColor orangeColor].CGColor,(__bridge id)[UIColor redColor].CGColor]]];
-    imgView.origin = CGPointMake(50, 100);
-    [self.view addSubview:imgView];
+
 }
 
 @end
