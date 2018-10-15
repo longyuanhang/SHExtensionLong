@@ -21,7 +21,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-
+    
+    [[UIImage imageNamed:@"2"] getImageColorWithBlock:^(NSString *colorString) {
+        if (colorString) {
+            self.view.backgroundColor = [UIColor colorWithHexString:colorString];
+        }
+    }];
 }
 
 @end

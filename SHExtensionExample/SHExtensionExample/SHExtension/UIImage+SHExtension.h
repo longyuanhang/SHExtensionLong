@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Palette.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIImage *)imageWithColor:(UIColor *)color;
 //图片置灰
 - (UIImage *)imageGray;
+
+//获取图片颜色
+- (void)getImageColorWithBlock:(ColorBlock)block;
 
 //保存图片到手机
 + (void)saveImageWithImage:(UIImage *)image block:(void(^) (NSURL *url))block;

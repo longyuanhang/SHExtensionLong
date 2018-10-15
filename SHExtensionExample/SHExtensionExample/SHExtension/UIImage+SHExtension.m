@@ -137,6 +137,14 @@
     return resultUIImage;
 }
 
+#pragma mark 获取图片颜色
+- (void)getImageColorWithBlock:(ColorBlock)block{
+    
+    Palette *palette = [[Palette alloc]init];
+    palette.image = self;
+    [palette startWithBlock:block];
+}
+
 #pragma mark 保存图片到手机
 + (void)saveImageWithImage:(UIImage *)image block:(nonnull void (^)(NSURL *))block{
     
