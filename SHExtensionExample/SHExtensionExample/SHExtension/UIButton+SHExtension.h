@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 //扩大button点击区域(4边扩大相同值)
 @property (nonatomic, assign) CGFloat enlargedEdge;
+
 //扩大button点击区域(上左下右)
 - (void)setEnlargedEdgeWithEdgeInsets:(UIEdgeInsets)edgeInsets;
 
