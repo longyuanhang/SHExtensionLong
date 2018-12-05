@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
     end
 
     s.subspec 'UIImage+SHExtension' do |img|
-        img.source_files = "SHExtension/UIImage+SHExtension.{h,m}"
+        img.source_files = "SHExtension/{UIImage+SHExtension,PriorityBoxArray,PaletteSwatch,Palette}.{h,m}"
     end
 
     s.subspec 'UIImageViewSHExtension' do |imgv|
