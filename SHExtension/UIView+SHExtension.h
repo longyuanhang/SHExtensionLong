@@ -22,10 +22,10 @@ IBInspectable
 @property (nonatomic, assign) CGFloat x;
 //Y轴
 @property (nonatomic, assign) CGFloat y;
-//右边X轴(只有GET)
-@property (nonatomic, assign) CGFloat maxX;
-//右边Y轴(只有GET)
-@property (nonatomic, assign) CGFloat maxY;
+//右边X轴
+@property (nonatomic, assign, readonly) CGFloat maxX;
+//右边Y轴
+@property (nonatomic, assign, readonly) CGFloat maxY;
 //中心点X轴
 @property (nonatomic, assign) CGFloat centerX;
 //中心点Y轴
@@ -38,6 +38,9 @@ IBInspectable
 @property (nonatomic, assign) CGPoint origin;
 //尺寸（width、height）
 @property (nonatomic, assign) CGSize size;
+
+//获取控制器
+@property (nullable, nonatomic, readonly) UIViewController *sh_vc;
 
 #pragma mark - 描边
 - (void)borderRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color;

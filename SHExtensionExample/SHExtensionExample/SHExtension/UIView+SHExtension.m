@@ -109,6 +109,16 @@
     return self.frame.origin;
 }
 
+- (UIViewController *)sh_vc {
+    for (UIView *view = self; view; view = view.superview) {
+        UIResponder *nextResponder = [view nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
+}
+
 #pragma mark - 描边
 - (void)borderRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color{
     
