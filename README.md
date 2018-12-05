@@ -6,10 +6,10 @@ pod 'SHExtension'
 ```
 # 模块使用 pod 导入
 ```
-pod 'SHExtension/NSString+SHExtension'
-pod 'SHExtension/UIButton+SHExtension'
-pod 'SHExtension/UIColor+SHExtension'
-pod 'SHExtension/UIImage+SHExtension'
-pod 'SHExtension/UIImageView+SHExtension'
-pod 'SHExtension/UIView+SHExtension'
+pod 'SHExtension/NSString'
+pod 'SHExtension/UIButton'
+pod 'SHExtension/UIColor'
+pod 'SHExtension/UIImage'
+pod 'SHExtension/UIImageView'
+pod 'SHExtension/UIView'
 ```
