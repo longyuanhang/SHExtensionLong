@@ -129,11 +129,10 @@
 }
 
 #pragma mark - 获取一个渐变色的视图
-+ (UIView *)getGradientViewWithSize:(CGSize)size colorArr:(NSArray *)colorArr{
++ (UIView *)getGradientViewWithSize:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint colorArr:(NSArray *)colorArr{
     
     UIView *view = [[UIView alloc]init];
     view.size = size;
-    
     //  CAGradientLayer类对其绘制渐变背景颜色、填充层的形状(包括圆角)
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
     gradientLayer.frame = view.bounds;
@@ -141,9 +140,9 @@
     gradientLayer.colors = colorArr;
     
     //  设置渐变颜色方向，左上点为(0,0), 右下点为(1,1)
-    gradientLayer.startPoint = CGPointMake(0, 0);
-    gradientLayer.endPoint = CGPointMake(1, 1);
-
+    gradientLayer.startPoint = startPoint;
+    gradientLayer.endPoint = endPoint;
+    
     // 设置渐变位置
     CGFloat loc = 1.0/(colorArr.count - 1);
     NSMutableArray *location = [[NSMutableArray alloc]init];
@@ -172,7 +171,7 @@
 }
 
 - (CGFloat)borderWidth{
-    return self.borderWidth;
+    return self.layer.borderWidth;
 }
 
 #pragma mark 设置边框颜色
@@ -182,7 +181,7 @@
 }
 
 - (UIColor *)borderColor{
-    return self.borderColor;
+    return [UIColor colorWithCGColor:self.layer.borderColor];
 }
 
 #pragma mark 设置圆角
@@ -193,9 +192,53 @@
 }
 
 - (CGFloat)cornerRadius{
-    return self.cornerRadius;
+    return self.layer.cornerRadius;
 }
 
+#pragma mark剪切
+- (void)setMasksToBounds:(BOOL)masksToBounds{
+    self.layer.masksToBounds = masksToBounds;
+}
 
+- (BOOL)masksToBounds{
+    return self.layer.masksToBounds;
+}
+
+#pragma mark 阴影颜色
+- (void)shadowColor:(UIColor *)shadowColor{
+    self.layer.shadowColor = shadowColor.CGColor;
+}
+
+- (UIColor *)shadowColor{
+    return [UIColor colorWithCGColor:self.layer.shadowColor];
+}
+
+#pragma mark 阴影偏移
+- (void)setShadowOffset:(CGSize)shadowOffset{
+    
+    self.layer.shadowOffset = shadowOffset;
+}
+
+- (CGSize)shadowOffset{
+    return self.layer.shadowOffset;
+}
+
+#pragma mark 阴影透明度
+- (void)setShadowOpacity:(CGFloat)shadowOpacity{
+    self.layer.shadowOpacity = shadowOpacity;
+}
+
+- (CGFloat)shadowOpacity{
+    return self.layer.shadowOpacity;
+}
+
+#pragma mark 阴影半径
+- (void)setShadowRadius:(CGFloat)shadowRadius{
+    self.layer.shadowRadius = shadowRadius;
+}
+
+- (CGFloat)shadowRadius{
+    return self.layer.shadowRadius;
+}
 
 @end
