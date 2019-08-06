@@ -12,4 +12,5 @@ pod 'SHExtension/UIColor'
 pod 'SHExtension/UIImage'
 pod 'SHExtension/UIImageView'
 pod 'SHExtension/UIView'
+pod 'SHExtension/Tool'
 ```
