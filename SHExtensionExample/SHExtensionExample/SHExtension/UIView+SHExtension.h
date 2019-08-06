@@ -43,14 +43,11 @@ IBInspectable
 @property (nullable, nonatomic, readonly) UIViewController *sh_vc;
 
 #pragma mark - 描边
-+ (UIView *)getGradientViewWithSize:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint colorArr:(NSArray *)colorArr;
-
-#pragma mark - 获取一个渐变色的视图
-+ (UIView *)getGradientViewWithSize:(CGSize)size colorArr:(NSArray *)colorArr;
+- (void)borderRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color;
 
 #pragma mark - xib 属性
 // 注意: 加上IBInspectable就可以可视化显示相关的属性
-//圆角h弧度
+//圆角弧度
 @property (nonatomic, assign)IBInspectable CGFloat cornerRadius;
 //边框宽度
 @property (nonatomic, assign)IBInspectable CGFloat borderWidth;

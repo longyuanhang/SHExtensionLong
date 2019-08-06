@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "SHExtension"
-    s.version      = "1.0.6"
+    s.version      = "1.0.7"
     s.summary      = "常用类别方法，拓展"
     s.license      = "MIT"
     s.authors      = { "CSH" => "624089195@qq.com" }
@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
     end
 
     s.subspec 'UIImage' do |img|
-        img.source_files = "SHExtension/{UIImage+SHExtension,PriorityBoxArray,PaletteSwatch,Palette}.{h,m}"
+        img.source_files = "SHExtension/{UIImage+SHExtension.{h,m}"
     end
 
     s.subspec 'UIImageView' do |imgv|
@@ -33,6 +33,10 @@ Pod::Spec.new do |s|
 
     s.subspec 'UIView' do |view|
         view.source_files = "SHExtension/UIView+SHExtension.{h,m}"
+    end
+
+    s.subspec 'Tool' do |tool|
+        tool.source_files = "SHExtension/SHTool.{h,m}"
     end
 
 end

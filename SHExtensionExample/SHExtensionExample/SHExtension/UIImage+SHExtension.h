@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Palette.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef void(^ColorBlock)(NSString *colorString);
 
 @interface UIImage (SHExtension)
 
@@ -40,5 +41,68 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImage *)getImageWithSize:(CGSize)size colorArr:(NSArray *)colorArr;
 
 @end
+
+
+
+
+
+
+
+
+
+#pragma mark - 获取图片颜色类
+
+static const NSInteger kMaxColorNum = 16;
+
+@interface Palette : NSObject
+
+@property (nonatomic, strong) UIImage *image;
+
+- (void)startWithBlock:(ColorBlock)block;
+
+@end
+
+@interface VBox : NSObject
+
+- (NSInteger)getVolume;
+
+@end
+
+
+@interface PaletteSwatch : NSObject
+
+- (instancetype)initWithColorInt:(NSInteger)colorInt population:(NSInteger)population;
+
+- (UIColor*)getColor;
+
+//eg:"#FF3000"
+- (NSString*)getColorString;
+
+- (NSArray*)getHsl;
+
+- (NSInteger)getPopulation;
+
+
+@end
+
+@class VBox;
+
+//A queue like PriorityQueue in Java
+
+@interface PriorityBoxArray : NSObject
+
+- (void)addVBox:(VBox*)box;
+
+- (VBox*)objectAtIndex:(NSInteger)i;
+
+//Get the header element and delete it
+- (VBox*)poll;
+
+- (NSUInteger)count;
+
+- (NSMutableArray*)getVBoxArray;
+
+@end
+
 
 NS_ASSUME_NONNULL_END
