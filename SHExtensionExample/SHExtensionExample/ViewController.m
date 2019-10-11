@@ -11,8 +11,9 @@
 #import "UIColor+SHExtension.h"
 #import "UIView+SHExtension.h"
 #import "UIImage+SHExtension.h"
+#import "SHTool.h"
 
-@interface ViewController ()
+@interface ViewController ()<UITextFieldDelegate>
 
 @end
 
@@ -27,6 +28,15 @@
             self.view.backgroundColor = [UIColor colorWithHexString:colorString];
         }
     }];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    //纯数字
+    
+    //处理数据
+    [SHTool handleTextField:textField shouldChangeCharactersInRange:range replacementString:string rule:@[@"3",@"4",@"4"]];
+    //设置光标位置
+    return NO;
 }
 
 @end
