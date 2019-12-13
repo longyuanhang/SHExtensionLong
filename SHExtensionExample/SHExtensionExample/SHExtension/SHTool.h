@@ -85,11 +85,13 @@ static NSString *sh_fomat_8 = @"YYYY-MM-dd-HH-mm-ss-SSS";
 + (void)handleTextField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string rule:(NSArray *)rule;
 
 #pragma mark - 格式化字符串
+/// 格式化字符串
+/// @param text 内容
+/// @param rule 格式([@"3",@"4",@"4"])
 + (NSString *)handleStrWithText:(NSString *)text rule:(NSArray *)rule;
 
 #pragma mark - 获取某个字符在字符串中出现的次数
-+ (NSInteger)searchCountWithStr:(NSString *)str searchStr:(NSString *)searchStr;
-
++ (NSInteger)appearCountWithStr:(NSString *)str target:(NSString *)target;
 
 @end
 

@@ -305,7 +305,7 @@
     NSString *str = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
     text = [text stringByReplacingCharactersInRange:range withString:str];
     
-    NSInteger count = [SHTool searchCountWithStr:[text substringWithRange:NSMakeRange(0, range.location)] searchStr:@" "];
+    NSInteger count = [SHTool appearCountWithStr:[text substringWithRange:NSMakeRange(0, range.location)] target:@" "];
 
     text = [text stringByReplacingOccurrencesOfString:@" " withString:@""];
     
@@ -318,7 +318,7 @@
 
             NSString *temp = [textField.text substringWithRange:NSMakeRange(0, range.location + str.length)];
 
-           count = [self searchCountWithStr:temp searchStr:@" "] - count;
+           count = [self appearCountWithStr:temp target:@" "] - count;
            range = NSMakeRange(range.location + count, 0);
         }
 
@@ -372,21 +372,11 @@
 }
 
 #pragma mark - 获取某个字符在字符串中出现的次数
-+ (NSInteger)searchCountWithStr:(NSString *)str searchStr:(NSString *)searchStr{
++ (NSInteger)appearCountWithStr:(NSString *)str target:(NSString *)target{
     
-    NSUInteger count = 0, length = str.length;
-    NSRange range = NSMakeRange(0, length);
+    NSArray *temp = [str componentsSeparatedByString:target];
     
-    while(range.length != 0) {
-        
-      range = [str rangeOfString:searchStr options:0 range:range];
-      if(range.length != 0) {
-        range = NSMakeRange(range.location + range.length, length - (range.location + range.length));
-        count++;
-      }
-    }
-    
-    return count;
+    return temp.count - 1;
 }
 
 
