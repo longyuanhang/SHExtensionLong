@@ -163,6 +163,12 @@
 }
 
 #pragma mark - xib 属性
+#pragma mark 加载xib
++ (instancetype)loadXib{
+    NSString *className = NSStringFromClass(self);
+    return [[[NSBundle mainBundle] loadNibNamed:className owner:nil options:nil] firstObject];
+}
+
 #pragma mark 设置边框宽度
 - (void)setBorderWidth:(CGFloat)borderWidth {
     

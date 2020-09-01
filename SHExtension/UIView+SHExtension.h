@@ -46,6 +46,9 @@ IBInspectable
 - (void)borderRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color;
 
 #pragma mark - xib 属性
+//加载xib
++ (instancetype)loadXib;
+
 // 注意: 加上IBInspectable就可以可视化显示相关的属性
 //圆角弧度
 @property (nonatomic, assign)IBInspectable CGFloat cornerRadius;
