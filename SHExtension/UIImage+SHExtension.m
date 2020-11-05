@@ -11,6 +11,14 @@
 
 @implementation UIImage (SHExtension)
 
+- (UIEdgeInsets)edgeInsets{
+    return UIEdgeInsetsZero;
+}
+
+- (void)setEdgeInsets:(UIEdgeInsets)edgeInsets{
+   [self resizableImageWithCapInsets:edgeInsets];
+}
+
 #pragma mark 获取指定大小的图片
 - (UIImage *)imageWithSize:(CGSize)size{
     
@@ -63,10 +71,6 @@
 
 #pragma mark 设置图片颜色(整体)
 - (UIImage *)imageWithColor:(UIColor *)color{
-    
-    //也可以使用
-    //    [self imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    //    imageview.tintColor = color;
     
     UIGraphicsBeginImageContextWithOptions(self.size, NO, 0);
     
@@ -138,7 +142,7 @@
 }
 
 #pragma mark 获取图片颜色
-- (void)getImageColorWithBlock:(ColorBlock)block{
+- (void)imageColorWithBlock:(ColorBlock)block{
     
     Palette *palette = [[Palette alloc]init];
     palette.image = self;
@@ -146,9 +150,9 @@
 }
 
 #pragma mark 保存图片到手机
-+ (void)saveImageWithImage:(UIImage *)image block:(nonnull void (^)(NSURL *))block{
+- (void)imageSaveBlock:(nonnull void (^)(NSURL *))block{
     
-    [[ALAssetsLibrary new] writeImageToSavedPhotosAlbum:image.CGImage orientation:(ALAssetOrientation)image.imageOrientation completionBlock:^(NSURL *assetURL, NSError *error) {
+    [[ALAssetsLibrary new] writeImageToSavedPhotosAlbum:self.CGImage orientation:(ALAssetOrientation)self.imageOrientation completionBlock:^(NSURL *assetURL, NSError *error) {
         NSLog(@"%@",[NSThread currentThread]);
         //回调
         if (block) {
@@ -159,32 +163,6 @@
             }
         }
     }];
-}
-
-#pragma mark 保存视图到手机
-+ (void)saveImageWithView:(UIView *)view block:(nonnull void (^)(NSURL *))block{
-    
-    UIImage *image = [UIImage getImageWithView:view];
-    [UIImage saveImageWithImage:image block:block];
-}
-
-#pragma mark 通过视图获取一张图片
-+ (UIImage *)getImageWithView:(UIView *)view{
-    
-    return [UIImage getImageWithLayer:view.layer];
-}
-
-#pragma mark 通过layer获取一张图片
-+ (UIImage *)getImageWithLayer:(CALayer *)layer{
-    
-    UIGraphicsBeginImageContextWithOptions(layer.frame.size, NO, 0);
-    
-    [layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    
-    return image;
 }
 
 #pragma mark 通过颜色获取一张图片
@@ -201,6 +179,19 @@
     CGContextFillRect(context, rect);
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     //结束
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+#pragma mark 通过layer获取一张图片
++ (UIImage *)getImageWithLayer:(CALayer *)layer{
+    
+    UIGraphicsBeginImageContextWithOptions(layer.frame.size, NO, 0);
+    
+    [layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    
     UIGraphicsEndImageContext();
     
     return image;
@@ -237,22 +228,6 @@
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

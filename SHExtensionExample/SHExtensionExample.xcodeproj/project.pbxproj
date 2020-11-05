@@ -17,7 +17,7 @@
 		5C73D61D21537460008D91D8 /* SHExtensionExampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C73D61C21537460008D91D8 /* SHExtensionExampleUITests.m */; };
 		5C73D63721537495008D91D8 /* UIView+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C73D62B21537495008D91D8 /* UIView+SHExtension.m */; };
 		5C73D63821537495008D91D8 /* NSString+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C73D63021537495008D91D8 /* NSString+SHExtension.m */; };
-		5C73D63921537495008D91D8 /* UIButton+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C73D63121537495008D91D8 /* UIButton+SHExtension.m */; };
+		5C73D63921537495008D91D8 /* SHButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C73D63121537495008D91D8 /* SHButton.m */; };
 		5C73D63B21537495008D91D8 /* UIColor+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C73D63421537495008D91D8 /* UIColor+SHExtension.m */; };
 		5C73D63C21537495008D91D8 /* UIImage+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C73D63521537495008D91D8 /* UIImage+SHExtension.m */; };
 		5C7E693E216DDE810095939F /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C7E693D216DDE810095939F /* 2.png */; };
@@ -60,11 +60,11 @@
 		5C73D61C21537460008D91D8 /* SHExtensionExampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHExtensionExampleUITests.m; sourceTree = "<group>"; };
 		5C73D61E21537460008D91D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C73D62B21537495008D91D8 /* UIView+SHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SHExtension.m"; sourceTree = "<group>"; };
-		5C73D62D21537495008D91D8 /* UIButton+SHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+SHExtension.h"; sourceTree = "<group>"; };
+		5C73D62D21537495008D91D8 /* SHButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHButton.h; sourceTree = "<group>"; };
 		5C73D62E21537495008D91D8 /* UIImage+SHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SHExtension.h"; sourceTree = "<group>"; };
 		5C73D62F21537495008D91D8 /* UIColor+SHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SHExtension.h"; sourceTree = "<group>"; };
 		5C73D63021537495008D91D8 /* NSString+SHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SHExtension.m"; sourceTree = "<group>"; };
-		5C73D63121537495008D91D8 /* UIButton+SHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+SHExtension.m"; sourceTree = "<group>"; };
+		5C73D63121537495008D91D8 /* SHButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHButton.m; sourceTree = "<group>"; };
 		5C73D63321537495008D91D8 /* UIView+SHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SHExtension.h"; sourceTree = "<group>"; };
 		5C73D63421537495008D91D8 /* UIColor+SHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SHExtension.m"; sourceTree = "<group>"; };
 		5C73D63521537495008D91D8 /* UIImage+SHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SHExtension.m"; sourceTree = "<group>"; };
@@ -166,14 +166,14 @@
 				5C73D63421537495008D91D8 /* UIColor+SHExtension.m */,
 				5C73D63621537495008D91D8 /* NSString+SHExtension.h */,
 				5C73D63021537495008D91D8 /* NSString+SHExtension.m */,
-				5C73D62D21537495008D91D8 /* UIButton+SHExtension.h */,
-				5C73D63121537495008D91D8 /* UIButton+SHExtension.m */,
 				5CF761A921538D9500C68FD6 /* UIImageView+SHExtension.h */,
 				5CF761AA21538D9500C68FD6 /* UIImageView+SHExtension.m */,
 				5C73D62E21537495008D91D8 /* UIImage+SHExtension.h */,
 				5C73D63521537495008D91D8 /* UIImage+SHExtension.m */,
 				5CD77B7D22F9137F0090DB01 /* SHTool.h */,
 				5CD77B7E22F9137F0090DB01 /* SHTool.m */,
+				5C73D62D21537495008D91D8 /* SHButton.h */,
+				5C73D63121537495008D91D8 /* SHButton.m */,
 			);
 			path = SHExtension;
 			sourceTree = "<group>";
@@ -314,7 +314,7 @@
 				5C73D5FD2153745E008D91D8 /* ViewController.m in Sources */,
 				5CD77B7F22F9137F0090DB01 /* SHTool.m in Sources */,
 				5C73D63C21537495008D91D8 /* UIImage+SHExtension.m in Sources */,
-				5C73D63921537495008D91D8 /* UIButton+SHExtension.m in Sources */,
+				5C73D63921537495008D91D8 /* SHButton.m in Sources */,
 				5C73D60821537460008D91D8 /* main.m in Sources */,
 				5CF761AB21538D9500C68FD6 /* UIImageView+SHExtension.m in Sources */,
 				5C73D5FA2153745E008D91D8 /* AppDelegate.m in Sources */,

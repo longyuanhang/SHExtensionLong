@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface UIButton (SHExtension)
+@interface SHButton : UIButton
 
 //扩大button点击区域(4边扩大相同值)
 @property (nonatomic, assign) CGFloat enlargedEdge;

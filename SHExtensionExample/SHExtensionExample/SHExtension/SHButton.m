@@ -6,7 +6,7 @@
 //  Copyright © 2018年 CSH. All rights reserved.
 //
 
-#import "UIButton+SHExtension.h"
+#import "SHButton.h"
 #import "objc/runtime.h"
 
 static char topEdgeKey;
@@ -14,7 +14,7 @@ static char leftEdgeKey;
 static char bottomEdgeKey;
 static char rightEdgeKey;
 
-@implementation UIButton (SHExtension)
+@implementation SHButton
 
 - (void)setEnlargedEdge:(CGFloat)enlargedEdge {
     [self setEnlargedEdgeWithEdgeInsets:UIEdgeInsetsMake(enlargedEdge, enlargedEdge, enlargedEdge, enlargedEdge)];

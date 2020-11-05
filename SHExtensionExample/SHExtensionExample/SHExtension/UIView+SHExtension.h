@@ -40,10 +40,16 @@ IBInspectable
 @property (nonatomic, assign) CGSize size;
 
 //获取控制器
-@property (nullable, nonatomic, readonly) UIViewController *sh_vc;
+@property (nonatomic, strong, readonly) UIViewController *sh_vc;
+//视图生成图片
+@property (nonatomic, strong, readonly) UIImage *img;
 
 #pragma mark - 描边
 - (void)borderRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color;
+- (void)borderRadius:(CGFloat)radius corners:(UIRectCorner)corners;
+
+#pragma mark - 获取一个渐变色的视图
++ (UIView *)getGradientViewWithSize:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint colorArr:(NSArray *)colorArr;
 
 #pragma mark - xib 属性
 //加载xib

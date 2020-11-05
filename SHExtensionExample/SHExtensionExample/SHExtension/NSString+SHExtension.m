@@ -12,32 +12,6 @@
 
 @implementation NSString (SHExtension)
 
-#pragma mark SET
-- (void)setPinyin:(NSString *)pinyin{
-    
-}
-- (void)setFileName:(NSString *)fileName{
-    
-}
-- (void)setTextLength:(NSInteger)textLength{
-    
-}
-- (void)setMd5:(NSString *)md5{
-    
-}
-- (void)setBase64:(NSString *)base64{
-    
-}
-- (void)setDecoded64:(NSString *)decoded64{
-    
-}
-- (void)setIsEmail:(BOOL)isEmail{
-    
-}
-- (void)setIsFirstLetter:(BOOL)isFirstLetter{
-    
-}
-
 #pragma mark 获取拼音
 - (NSString *)pinyin{
     
