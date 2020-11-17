@@ -12,8 +12,10 @@
 #import "UIView+SHExtension.h"
 #import "UIImage+SHExtension.h"
 #import "SHTool.h"
+#import "UIButton+SHExtension.h"
 
 @interface ViewController ()<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *btn;
 
 @end
 
@@ -29,6 +31,9 @@
 //            self.view.backgroundColor = [UIColor colorWithHexString:colorString];
 //        }
 //    }];
+    
+    [self.btn imageDirection:SHButtonImageDirectionTop space:10];
+    
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

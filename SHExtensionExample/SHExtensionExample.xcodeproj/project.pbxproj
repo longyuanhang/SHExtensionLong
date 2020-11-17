@@ -23,6 +23,7 @@
 		5C7E693E216DDE810095939F /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C7E693D216DDE810095939F /* 2.png */; };
 		5CD77B7F22F9137F0090DB01 /* SHTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CD77B7E22F9137F0090DB01 /* SHTool.m */; };
 		5CF761AB21538D9500C68FD6 /* UIImageView+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CF761AA21538D9500C68FD6 /* UIImageView+SHExtension.m */; };
+		835093912563CB9B00466625 /* UIButton+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 835093902563CB9B00466625 /* UIButton+SHExtension.m */; };
 		836E0DE425636D4F002B7600 /* 1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 836E0DE325636D4B002B7600 /* 1.jpeg */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,8 @@
 		5CD77B7E22F9137F0090DB01 /* SHTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHTool.m; sourceTree = "<group>"; };
 		5CF761A921538D9500C68FD6 /* UIImageView+SHExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImageView+SHExtension.h"; sourceTree = "<group>"; };
 		5CF761AA21538D9500C68FD6 /* UIImageView+SHExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+SHExtension.m"; sourceTree = "<group>"; };
+		8350938F2563CB9B00466625 /* UIButton+SHExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+SHExtension.h"; sourceTree = "<group>"; };
+		835093902563CB9B00466625 /* UIButton+SHExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+SHExtension.m"; sourceTree = "<group>"; };
 		836E0DE325636D4B002B7600 /* 1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,6 +176,8 @@
 				5CF761AA21538D9500C68FD6 /* UIImageView+SHExtension.m */,
 				5C73D62E21537495008D91D8 /* UIImage+SHExtension.h */,
 				5C73D63521537495008D91D8 /* UIImage+SHExtension.m */,
+				8350938F2563CB9B00466625 /* UIButton+SHExtension.h */,
+				835093902563CB9B00466625 /* UIButton+SHExtension.m */,
 				5CD77B7D22F9137F0090DB01 /* SHTool.h */,
 				5CD77B7E22F9137F0090DB01 /* SHTool.m */,
 				5C73D62D21537495008D91D8 /* SHButton.h */,
@@ -317,6 +322,7 @@
 				5C73D63821537495008D91D8 /* NSString+SHExtension.m in Sources */,
 				5C73D5FD2153745E008D91D8 /* ViewController.m in Sources */,
 				5CD77B7F22F9137F0090DB01 /* SHTool.m in Sources */,
+				835093912563CB9B00466625 /* UIButton+SHExtension.m in Sources */,
 				5C73D63C21537495008D91D8 /* UIImage+SHExtension.m in Sources */,
 				5C73D63921537495008D91D8 /* SHButton.m in Sources */,
 				5C73D60821537460008D91D8 /* main.m in Sources */,
