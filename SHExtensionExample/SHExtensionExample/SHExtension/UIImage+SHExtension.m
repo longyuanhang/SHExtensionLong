@@ -16,7 +16,7 @@
 }
 
 - (void)setEdgeInsets:(UIEdgeInsets)edgeInsets{
-   [self resizableImageWithCapInsets:edgeInsets];
+    [self resizableImageWithCapInsets:edgeInsets];
 }
 
 #pragma mark 获取指定大小的图片
@@ -163,6 +163,51 @@
             }
         }
     }];
+}
+
+#pragma mark 压缩图片
+- (UIImage *)imageCompressionWithByte:(NSInteger)length{
+    CGFloat compression = 1;
+    NSData *data = UIImageJPEGRepresentation(self, compression);
+    if (data.length < length)
+    {
+        return self;
+    }
+    
+    CGFloat max = 1;
+    CGFloat min = 0;
+    for (int i = 0; i < 6; ++i) {
+        compression = (max + min) / 2;
+        data = UIImageJPEGRepresentation(self, compression);
+        if (data.length < length * 0.9) {
+            min = compression;
+        } else if (data.length > length) {
+            max = compression;
+        } else {
+            break;
+        }
+    }
+    UIImage *resultImage = [UIImage imageWithData:data];
+    if (data.length < length)
+    {
+        return resultImage;
+    }
+    
+    // Compress by size
+    NSUInteger lastDataLength = 0;
+    while (data.length > length && data.length != lastDataLength) {
+        lastDataLength = data.length;
+        CGFloat ratio = (CGFloat)length / data.length;
+        CGSize size = CGSizeMake((NSUInteger)(resultImage.size.width * sqrtf(ratio)),
+                                 (NSUInteger)(resultImage.size.height * sqrtf(ratio))); // Use NSUInteger to prevent white blank
+        UIGraphicsBeginImageContext(size);
+        [resultImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
+        resultImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        data = UIImageJPEGRepresentation(resultImage, compression);
+    }
+    
+    return resultImage;
 }
 
 #pragma mark 通过颜色获取一张图片

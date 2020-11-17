@@ -23,11 +23,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [[UIImage imageNamed:@"2"] imageColorWithBlock:^(NSString *colorString) {
-        if (colorString) {
-            self.view.backgroundColor = [UIColor colorWithHexString:colorString];
-        }
-    }];
+    [[UIImage imageNamed:@"1.jpeg"] imageCompressionWithByte:10*1024];
+//    [[UIImage imageNamed:@"2"] imageColorWithBlock:^(NSString *colorString) {
+//        if (colorString) {
+//            self.view.backgroundColor = [UIColor colorWithHexString:colorString];
+//        }
+//    }];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

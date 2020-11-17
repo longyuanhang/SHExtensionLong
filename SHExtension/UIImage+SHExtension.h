@@ -28,6 +28,8 @@ typedef void(^ColorBlock)(NSString *colorString);
 - (void)imageColorWithBlock:(ColorBlock)block;
 //保存图片到手机
 - (void)imageSaveBlock:(void(^) (NSURL *url))block;
+//压缩图片
+- (UIImage *)imageCompressionWithByte:(NSInteger)length;
 
 //通过颜色获取一张图片
 + (UIImage *)getImageWithColor:(UIColor *)color;
