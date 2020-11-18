@@ -15,6 +15,7 @@
 #import "UIButton+SHExtension.h"
 
 @interface ViewController ()<UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UIButton *btn;
 
 @end
@@ -26,18 +27,17 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     [[UIImage imageNamed:@"1.jpeg"] imageCompressionWithByte:10*1024];
-//    [[UIImage imageNamed:@"2"] imageColorWithBlock:^(NSString *colorString) {
-//        if (colorString) {
-//            self.view.backgroundColor = [UIColor colorWithHexString:colorString];
-//        }
-//    }];
-    
-    [self.btn imageDirection:SHButtonImageDirectionTop space:10];
+    [[UIImage imageNamed:@"2"] imageColorWithBlock:^(NSString *colorString) {
+        if (colorString) {
+            self.view.backgroundColor = [UIColor colorWithHexString:colorString];
+        }
+    }];
+    [self.btn imageDirection:SHButtonImageDirection_top space:10];
+
     
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    //纯数字
 
     //处理数据
     [SHTool handleTextField:textField shouldChangeCharactersInRange:range replacementString:string rule:@[@3,@4,@4]];
