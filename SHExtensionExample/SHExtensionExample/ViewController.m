@@ -25,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+    NSLog(@"表情===%i",@"哈哈😄".isEmoji);
     [[UIImage imageNamed:@"1.jpeg"] imageCompressionWithByte:10*1024];
     [[UIImage imageNamed:@"2"] imageColorWithBlock:^(NSString *colorString) {
         if (colorString) {

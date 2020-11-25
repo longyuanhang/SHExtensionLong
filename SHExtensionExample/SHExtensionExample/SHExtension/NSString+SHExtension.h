@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) BOOL isEmail;
 //是否首字母开头
 @property (nonatomic, assign, readonly) BOOL isFirstLetter;
+//是否包含系统表情
+@property (nonatomic, assign, readonly) BOOL isEmoji;
 
 //获取MD5加密
 @property (nonatomic, copy, readonly) NSString *md5;
