@@ -161,21 +161,7 @@
     return 0;
 }
 
-#pragma mark 处理个数
-+ (NSString *)dealCount:(NSString *)count{
-    
-    if (![count intValue]){
-        
-        return @"";
-    }else if ([count intValue] >= 1000 && [count intValue] < 10000){
-        
-        return [NSString stringWithFormat:@"%.1fK",[count doubleValue]/1000];
-    }else if ([count intValue] >= 10000) {
-        return [NSString stringWithFormat:@"%.1fW",[count doubleValue]/10000];
-    }
-    return count;
-}
-
+#pragma mark - 计算方法
 #pragma mark 计算富文本的size
 + (CGSize)getSizeWithAtt:(NSAttributedString *)att
                  maxSize:(CGSize)maxSize{
@@ -214,19 +200,36 @@
     return (attH > ceil(lineH));
 }
 
-#pragma mark 获取行高
-+ (CGFloat)getLineHeightWithLine:(CGFloat)line font:(UIFont *)font{
+#pragma mark 获取真实行间距
++ (CGFloat)lineSpaceWithLine:(CGFloat)line font:(UIFont *)font{
     
     return line - (font.lineHeight - font.pointSize);
 }
 
-#pragma mark 获取行间距
-+ (CGFloat)getLineSpacingWithAtt:(NSMutableAttributedString *)att line:(CGFloat)line font:(UIFont *)font maxW:(CGFloat)maxW{
+#pragma mark 获取属性字符串真实行间距
++ (CGFloat)lineSpaceWithLineWithAtt:(NSAttributedString *)att line:(CGFloat)line font:(UIFont *)font maxW:(CGFloat)maxW{
     
-    BOOL isLine = [self isLineWithAtt:att lineH:font.lineHeight maxW:maxW];
-    CGFloat space = [self getLineHeightWithLine:line font:font];
+    if ([self isLineWithAtt:att lineH:font.lineHeight maxW:maxW]) {
+        return [self lineSpaceWithLine:line font:font];
+    }
+    //只有一行行间距为0
+    return 0;
+}
+
+#pragma mark - 其他方法
+#pragma mark 处理个数
++ (NSString *)dealCount:(NSString *)count{
     
-    return isLine?space:0;
+    if (![count intValue]){
+        
+        return @"";
+    }else if ([count intValue] >= 1000 && [count intValue] < 10000){
+        
+        return [NSString stringWithFormat:@"%.1fK",[count doubleValue]/1000];
+    }else if ([count intValue] >= 10000) {
+        return [NSString stringWithFormat:@"%.1fW",[count doubleValue]/10000];
+    }
+    return count;
 }
 
 #pragma mark 处理金额
@@ -250,7 +253,7 @@
     return [NSString stringWithFormat:@"%.2f",[str floatValue]];
 }
 
-#pragma mark - 获取一个渐变色的视图
+#pragma mark 获取一个渐变色的视图
 + (UIView *)getGradientViewWithSize:(CGSize)size colorArr:(NSArray *)colorArr{
     return [self getGradientViewWithSize:size startPoint:CGPointMake(0.5, 0) endPoint:CGPointMake(0.5, 1) colorArr:colorArr];
 }
@@ -288,7 +291,7 @@
     return view;
 }
 
-#pragma mark - 格式化TextField字符串
+#pragma mark 格式化TextField字符串
 + (void)handleTextField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string rule:(NSArray *)rule{
     
     NSString *text = textField.text;
@@ -337,7 +340,7 @@
     textField.selectedTextRange = textRange;
 }
 
-#pragma mark - 格式化字符串
+#pragma mark 格式化字符串
 + (NSString *)handleStrWithText:(NSString *)text rule:(NSArray *)rule{
     
     __block NSString *tempStr = @"";
@@ -371,12 +374,45 @@
     return tempStr;
 }
 
-#pragma mark - 获取某个字符在字符串中出现的次数
+#pragma mark 获取某个字符在字符串中出现的次数
 + (NSInteger)appearCountWithStr:(NSString *)str target:(NSString *)target{
     
     NSArray *temp = [str componentsSeparatedByString:target];
     
     return temp.count - 1;
+}
+
+#pragma mark 获取最上方控制器
++ (UIViewController *)getCurrentVC{
+    
+    UIWindow *window = [UIApplication sharedApplication].delegate.window;
+    if (window.windowLevel != UIWindowLevelNormal) {
+        NSArray *windows = [[UIApplication sharedApplication] windows];
+        for (UIWindow * tmpWin in windows) {
+            if (tmpWin.windowLevel == UIWindowLevelNormal) {
+                window = tmpWin;
+                break;
+            }
+        }
+    }
+    UIViewController *rootVC = window.rootViewController;
+    UIViewController *activeVC = nil;
+    
+    while (true) {
+        if ([rootVC isKindOfClass:[UINavigationController class]]) {
+            activeVC = [(UINavigationController *)rootVC visibleViewController];
+        } else if ([rootVC isKindOfClass:[UITabBarController class]]) {
+            activeVC = [(UITabBarController *)rootVC selectedViewController];
+        } else if (rootVC.presentedViewController) {
+            activeVC = rootVC.presentedViewController;
+        } else if (rootVC.childViewControllers.count > 0) {
+            activeVC = [rootVC.childViewControllers lastObject];
+        } else {
+            break;
+        }
+        rootVC = activeVC;
+    }
+    return activeVC;
 }
 
 

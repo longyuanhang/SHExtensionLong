@@ -176,6 +176,25 @@
     return view;
 }
 
+#pragma mark 按照图片裁剪视图
+- (void)makeMaskViewWithImage:(UIImage *)image {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        CALayer *maskLayer = [CALayer layer];
+        maskLayer.frame = self.bounds;
+        //把视图设置成图片的样子
+        [maskLayer setContents:(id)image.CGImage];
+        [maskLayer setContentsScale:image.scale];
+        [maskLayer setContentsCenter:CGRectMake(((image.size.width/2) - 1)/image.size.width,
+                                                ((image.size.height/1.5) - 1)/image.size.height,
+                                                1 / image.size.width,
+                                                1 / image.size.height)];
+        
+        self.layer.mask = maskLayer;
+    });
+}
+
 #pragma mark - xib 属性
 #pragma mark 加载xib
 + (instancetype)loadXib{

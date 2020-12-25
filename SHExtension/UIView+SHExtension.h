@@ -51,6 +51,9 @@ IBInspectable
 #pragma mark - 获取一个渐变色的视图
 + (UIView *)getGradientViewWithSize:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint colorArr:(NSArray *)colorArr;
 
+#pragma mark 按照图片裁剪视图
+- (void)makeMaskViewWithImage:(UIImage *)image;
+
 #pragma mark - xib 属性
 //加载xib
 + (instancetype)loadXib;

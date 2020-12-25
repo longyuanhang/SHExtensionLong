@@ -10,12 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, SHButtonImageDirection) {
-    SHButtonImageDirectionTop,
-    SHButtonImageDirectionLeft,
-    SHButtonImageDirectionRight,
-    SHButtonImageDirectionBottom,
-};
+typedef enum : NSUInteger {
+    SHButtonImageDirection_top,
+    SHButtonImageDirection_left,
+    SHButtonImageDirection_right,
+    SHButtonImageDirection_bottom,
+} SHButtonImageDirection;
 
 @interface UIButton (SHExtension)
 

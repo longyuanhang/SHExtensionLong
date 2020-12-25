@@ -19,7 +19,7 @@
     textHeight = self.titleLabel.frame.size.height;
     space = space / 2;
     switch (direction) {
-        case SHButtonImageDirectionTop:{
+        case SHButtonImageDirection_top:{
             x = textHeight / 2 + space;
             y = textWidth / 2;
             self.imageEdgeInsets = UIEdgeInsetsMake(-x, y, x, - y);
@@ -28,7 +28,7 @@
             self.titleEdgeInsets = UIEdgeInsetsMake(x, - y, - x, y);
         }
             break;
-        case SHButtonImageDirectionBottom:{
+        case SHButtonImageDirection_bottom:{
             x = textHeight / 2 + space;
             y = textWidth / 2;
             self.imageEdgeInsets = UIEdgeInsetsMake(x, y, -x, - y);
@@ -37,12 +37,12 @@
             self.titleEdgeInsets = UIEdgeInsetsMake(-x, - y, x, y);
         }
             break;
-        case SHButtonImageDirectionLeft:{
+        case SHButtonImageDirection_left:{
             self.imageEdgeInsets = UIEdgeInsetsMake(0, -space,0, space);
             self.titleEdgeInsets = UIEdgeInsetsMake(0, space , 0, - space);
         }
             break;
-        case SHButtonImageDirectionRight:{
+        case SHButtonImageDirection_right:{
             self.imageEdgeInsets = UIEdgeInsetsMake(0, space + textWidth, 0, - (space + textWidth));
             self.titleEdgeInsets = UIEdgeInsetsMake(0, -(space + imageWidth), 0, (space + imageWidth));
         }
