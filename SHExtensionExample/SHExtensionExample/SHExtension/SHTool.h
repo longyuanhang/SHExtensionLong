@@ -23,29 +23,29 @@ static NSString *sh_fomat_8 = @"YYYY-MM-dd-HH-mm-ss-SSS";
 @interface SHTool : NSObject
 
 #pragma mark - Time方法
-#pragma mark 获取毫秒值
+#pragma mark 获取时间戳
 + (NSString *)getTimeMs;
 
 #pragma mark 获取指定格式时间
 + (NSString *)getTimeWithTime:(NSString *)time currentFormat:(NSString *)currentFormat format:(NSString *)format;
 
 #pragma mark 获取毫秒值(time -> ms)
-#pragma mark 获取当前
+#pragma mark 获取时间戳
 + (NSString *)getMsTimeWithTime:(NSString *)time format:(NSString *)format;
-#pragma mark 获取指定时区(8*60*60)
-+ (NSString *)getMsTimeWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT;
 
 #pragma mark 获取时间(ms -> time)
-#pragma mark 获取当前
+#pragma mark 获取时间
 + (NSString *)getTimeMsWithMs:(NSString *)ms format:(NSString *)format;
-#pragma mark 获取指定(8*60*60)
+#pragma mark 获取指定时区时间
 + (NSString *)getTimeMsWithMs:(NSString *)ms format:(NSString *)format GMT:(NSInteger)GMT;
 
 #pragma mark 获取当前时区
 + (NSInteger)getCurrentGMT;
 
 #pragma mark 获取即时时间
-+ (NSString *)getInstantTimeWithTime:(NSString *)time;
++ (NSString *)getInstantTimeWithMs:(NSString *)ms;
++ (NSString *)getInstantTimeWithTime:(NSString *)time format:(NSString *)format;
++ (NSString *)getInstantTimeWithDate:(NSDate *)date;
 
 #pragma mark 比较两个日期大小
 + (NSInteger)compareStartDate:(NSString *)startDate endDate:(NSString *)endDate;

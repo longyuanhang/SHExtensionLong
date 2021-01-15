@@ -11,7 +11,7 @@
 @implementation SHTool
 
 #pragma mark - Time方法
-#pragma mark 获取毫秒值
+#pragma mark 获取时间戳
 + (NSString *)getTimeMs{
     NSDate *date = [NSDate date];
     UInt64 recordTime = [date timeIntervalSince1970]*1000;
@@ -23,53 +23,52 @@
     if (!time.length) {
         return @"";
     }
-    //变成毫秒
+    //变成时间戳
     NSString *ms = [self getMsTimeWithTime:time format:currentFormat];
     
     return [self getTimeMsWithMs:ms format:format];
 }
 
 #pragma mark 获取毫秒值(time -> ms)
-#pragma mark 获取当前
+#pragma mark 获取时间戳
 + (NSString *)getMsTimeWithTime:(NSString *)time format:(NSString *)format{
-    if (!time.length) {
-        return @"";
-    }
-    return [self getMsTimeWithTime:time format:format];
-}
-
-#pragma mark 获取指定时区毫秒(8*60*60)
-+ (NSString *)getMsTimeWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT{
     
     if (!time.length) {
         return @"";
     }
-    
-    NSDate *date = [[NSDate alloc]initWithTimeIntervalSince1970:[time longLongValue]/1000];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:format];
-    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:GMT]];
     
-    return [formatter stringFromDate:date];
+    NSDate *date = [formatter dateFromString:time];
+    
+    UInt64 recordTime = [date timeIntervalSince1970]*1000;
+    
+    return [NSString stringWithFormat:@"%llu",recordTime];
 }
 
 #pragma mark 获取时间(ms -> time)
-#pragma mark 获取当前时间
+#pragma mark 获取时间
 + (NSString *)getTimeMsWithMs:(NSString *)ms format:(NSString *)format{
-    if (!ms.length) {
-        return @"";
-    }
-    
-    return [self getTimeMsWithMs:ms format:format];
+
+    return [self getTimeMsWithMs:ms format:format GMT:-1];
 }
 
-#pragma mark 获取指定时区时间(8*60*60)
+#pragma mark 获取指定时区时间
 + (NSString *)getTimeMsWithMs:(NSString *)ms format:(NSString *)format GMT:(NSInteger)GMT{
     if (!ms.length) {
         return @"";
     }
-    return [self getTimeMsWithMs:ms format:format GMT:GMT];
+    
+    NSDate *date = [[NSDate alloc]initWithTimeIntervalSince1970:[ms longLongValue]/1000];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:format];
+    if (GMT != -1) {
+        [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:GMT]];
+    }
+    
+    return [formatter stringFromDate:date];
 }
 
 #pragma mark 获取当前时区
@@ -79,17 +78,35 @@
 }
 
 #pragma mark 获取即时时间
-+ (NSString *)getInstantTimeWithTime:(NSString *)time{
-    
-    if (!time) {
++ (NSString *)getInstantTimeWithMs:(NSString *)ms{
+    if (!ms.length) {
         return @"";
     }
+    //转时间
+    NSString *time = [self getTimeMsWithMs:ms format:sh_fomat_1];
+
+    return  [self getInstantTimeWithTime:time format:sh_fomat_1];
+}
+
++ (NSString *)getInstantTimeWithTime:(NSString *)time format:(NSString *)format{
+    if (!time.length) {
+        return @"";
+    }
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
+    dateFormat.dateFormat = format;
+    //转date
+    NSDate *date = [dateFormat dateFromString:time];
+    
+    return [self getInstantTimeWithDate:date];
+}
+
++ (NSString *)getInstantTimeWithDate:(NSDate *)date{
+    
     NSDateFormatter *format = [[NSDateFormatter alloc]init];
-    format.dateFormat = sh_fomat_1;
-    NSDate *currentDate = [format dateFromString:time];
     
     //当前
-    NSDateComponents *currentComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday  fromDate:currentDate];
+    NSDateComponents *currentComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday  fromDate:date];
     
     //今天
     NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:[NSDate date]];
@@ -103,7 +120,7 @@
     if (currentComponents.year == todayComponents.year && currentComponents.month == todayComponents.month && currentComponents.day == todayComponents.day) {//今天
         
         //获取当前时时间戳差
-        NSTimeInterval time = [[NSDate date] timeIntervalSinceDate:currentDate];
+        NSTimeInterval time = [[NSDate date] timeIntervalSinceDate:date];
         
         if (time < 60) {//1分钟内
             
@@ -114,25 +131,34 @@
         }else if(time < 60*60*24){//1天内
             
             return [NSString stringWithFormat:@"%.0f小时前",time/60/60];
-        }else{//保护
-            
-            format.dateFormat = sh_fomat_4;
-            return [format stringFromDate:currentDate];
         }
     }else if (currentComponents.year == yesterdayComponents.year && currentComponents.month == yesterdayComponents.month && currentComponents.day == yesterdayComponents.day) {//昨天
         
         format.dateFormat = sh_fomat_5;
-        return [NSString stringWithFormat:@"昨天 %@",[format stringFromDate:currentDate]];
+        return [NSString stringWithFormat:@"昨天 %@",[format stringFromDate:date]];
     }else if (currentComponents.year == todayComponents.year){//今年
         
         format.dateFormat = sh_fomat_4;
-        return [format stringFromDate:currentDate];
-    }else{
-        
-        format.dateFormat = sh_fomat_3;
-        return [format stringFromDate:currentDate];
+        return [format stringFromDate:date];
     }
+    
+    //其他
+    format.dateFormat = sh_fomat_3;
+    return [format stringFromDate:date];
 }
+
+//+ (NSString *)getInstantTimeWithMs:(NSString *)ms{
+//
+//    if (!ms.length) {
+//        return @"";
+//    }
+//    //转时间
+//    NSString *time = [self getTimeMsWithMs:ms format:sh_fomat_1];
+//    NSDateFormatter *format = [[NSDateFormatter alloc]init];
+//    format.dateFormat = sh_fomat_1;
+//    //转date
+//
+//}
 
 #pragma mark 比较两个日期大小
 + (NSInteger)compareStartDate:(NSString *)startDate endDate:(NSString *)endDate{

@@ -34,7 +34,8 @@
     }];
     [self.btn imageDirection:SHButtonImageDirection_top space:10];
 
-    
+    NSString *str = [SHTool getInstantTimeWithMs:@"1610672356291"];
+    NSLog(@"===%@",str);
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
