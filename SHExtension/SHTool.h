@@ -19,6 +19,8 @@ static NSString *sh_fomat_5 = @"YYYY-MM-dd HH:mm";
 static NSString *sh_fomat_6 = @"YYYY-MM-dd";
 static NSString *sh_fomat_7 = @"YYYY-MM-dd HH:mm:ss:SSS";
 static NSString *sh_fomat_8 = @"YYYY-MM-dd-HH-mm-ss-SSS";
+static NSString *sh_fomat_9 = @"MM/dd";
+static NSString *sh_fomat_10 = @"HH:mm";
 
 @interface SHTool : NSObject
 
