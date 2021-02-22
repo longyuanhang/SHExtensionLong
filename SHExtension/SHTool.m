@@ -82,6 +82,9 @@
     if (!ms.length) {
         return @"";
     }
+    if (ms.length == 10) {
+        ms = [NSString stringWithFormat:@"%@000",ms];
+    }
     //转时间
     NSString *time = [self getTimeMsWithMs:ms format:sh_fomat_1];
 
@@ -134,31 +137,18 @@
         }
     }else if (currentComponents.year == yesterdayComponents.year && currentComponents.month == yesterdayComponents.month && currentComponents.day == yesterdayComponents.day) {//昨天
         
-        format.dateFormat = sh_fomat_5;
+        format.dateFormat = sh_fomat_10;
         return [NSString stringWithFormat:@"昨天 %@",[format stringFromDate:date]];
     }else if (currentComponents.year == todayComponents.year){//今年
         
-        format.dateFormat = sh_fomat_4;
+        format.dateFormat = sh_fomat_9;
         return [format stringFromDate:date];
     }
     
     //其他
-    format.dateFormat = sh_fomat_3;
+    format.dateFormat = sh_fomat_4;
     return [format stringFromDate:date];
 }
-
-//+ (NSString *)getInstantTimeWithMs:(NSString *)ms{
-//
-//    if (!ms.length) {
-//        return @"";
-//    }
-//    //转时间
-//    NSString *time = [self getTimeMsWithMs:ms format:sh_fomat_1];
-//    NSDateFormatter *format = [[NSDateFormatter alloc]init];
-//    format.dateFormat = sh_fomat_1;
-//    //转date
-//
-//}
 
 #pragma mark 比较两个日期大小
 + (NSInteger)compareStartDate:(NSString *)startDate endDate:(NSString *)endDate{
