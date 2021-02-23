@@ -53,6 +53,9 @@ static NSString *sh_fomat_11 = @"MM-dd";
 #pragma mark 比较两个日期大小
 + (NSInteger)compareStartDate:(NSString *)startDate endDate:(NSString *)endDate;
 
+#pragma mark 处理视频时间
++ (NSString *)dealVideoTime:(NSString *)time;
+
 #pragma mark - 计算方法
 #pragma mark 计算富文本的size
 + (CGSize)getSizeWithAtt:(NSAttributedString *)att

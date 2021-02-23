@@ -36,6 +36,9 @@
 
     NSString *str = [SHTool getInstantTimeWithMs:@"1610672356291"];
     NSLog(@"===%@",str);
+    
+    str = [SHTool dealVideoTime:@"a"];
+    NSLog(@"===%@",str);
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
