@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
     end
 
     s.subspec 'UIColor' do |ss|
-        color.source_files = "SHExtension/UIColor+SHExtension.{h,m}"
+        ss.source_files = "SHExtension/UIColor+SHExtension.{h,m}"
     end
 
     s.subspec 'UIImage' do |ss|
