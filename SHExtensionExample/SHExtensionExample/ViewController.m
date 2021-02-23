@@ -37,7 +37,7 @@
     NSString *str = [SHTool getInstantTimeWithMs:@"1610672356291"];
     NSLog(@"===%@",str);
     
-    str = [SHTool dealVideoTime:@"a"];
+    str = [SHTool handleVideoTime:@"1234"];
     NSLog(@"===%@",str);
 }
 

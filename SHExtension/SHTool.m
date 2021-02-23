@@ -171,35 +171,6 @@
     return 0;
 }
 
-#pragma mark 处理视频时间
-+ (NSString *)dealVideoTime:(NSString *)time {
-    NSTimeInterval interval = time.integerValue;
-    
-    if (interval <= 0) {
-        return @"00:00";
-    }
-    
-    NSDateComponentsFormatter *formatter = [[NSDateComponentsFormatter alloc] init];
-    formatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
-    formatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
-    
-    if (interval / (60 * 60) >= 1) {
-        //超过一小时
-        formatter.allowedUnits = kCFCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
-    } else {
-        formatter.allowedUnits = NSCalendarUnitMinute | NSCalendarUnitSecond;
-    }
-    
-    NSString *dealTime = [formatter stringFromTimeInterval:interval];
-    
-    if (dealTime.length == 7 || dealTime.length == 4) {
-        //补0
-        dealTime = [NSString stringWithFormat:@"0%@", dealTime];
-    }
-    
-    return dealTime;
-}
-
 #pragma mark - 计算方法
 #pragma mark 计算富文本的size
 + (CGSize)getSizeWithAtt:(NSAttributedString *)att
@@ -253,23 +224,20 @@
 
 #pragma mark - 其他方法
 #pragma mark 处理个数
-+ (NSString *)dealCount:(NSString *)count {
-    if (![count intValue]) {
-        return @"";
-    } else if ([count intValue] >= 1000 && [count intValue] < 10000) {
++ (NSString *)handleCount:(NSString *)count {
+    long num = count.longLongValue;
+    if (num >= 1000 && num < 10000) {
         return [NSString stringWithFormat:@"%.1fK", [count doubleValue] / 1000];
-    } else if ([count intValue] >= 10000) {
+    } else if (num >= 10000) {
         return [NSString stringWithFormat:@"%.1fW", [count doubleValue] / 10000];
     }
-    return count;
+    return [NSString stringWithFormat:@"%d",num];
 }
 
 #pragma mark 处理金额
 + (NSString *)handleMoneyWithStr:(NSString *)str {
-    if (!str.length) {
-        return @"0.00";
-    }
-    NSNumber *number = @([str floatValue]);
+
+    NSNumber *number = @(str.floatValue);
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.positivePrefix = @"";
     formatter.numberStyle = kCFNumberFormatterCurrencyStyle;
@@ -279,10 +247,32 @@
 
 #pragma mark 处理价格(小数点后两位)
 + (NSString *)handlePriceWithStr:(NSString *)str {
-    if (!str.length) {
-        return @"0.00";
+    return [NSString stringWithFormat:@"%.2f", str.floatValue];
+}
+
+#pragma mark 处理视频时间
++ (NSString *)handleVideoTime:(NSString *)time {
+    NSTimeInterval interval = time.integerValue;
+    
+    NSDateComponentsFormatter *formatter = [[NSDateComponentsFormatter alloc] init];
+    formatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
+    formatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
+    
+    if (interval / (60 * 60) >= 1) {
+        //超过一小时
+        formatter.allowedUnits = kCFCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
+    } else {
+        formatter.allowedUnits = NSCalendarUnitMinute | NSCalendarUnitSecond;
     }
-    return [NSString stringWithFormat:@"%.2f", [str floatValue]];
+    
+    NSString *dealTime = [formatter stringFromTimeInterval:interval];
+    
+    if (dealTime.length == 7 || dealTime.length == 4) {
+        //补0
+        dealTime = [NSString stringWithFormat:@"0%@", dealTime];
+    }
+    
+    return dealTime;
 }
 
 #pragma mark 获取一个渐变色的视图
