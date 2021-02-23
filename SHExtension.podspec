@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
     end
 
     s.subspec 'UIButton' do |ss|
-        ss.source_files = "SHExtension/SHButton.{h,m}"
+        ss.source_files = "SHExtension/SHButton.{h,m}","SHExtension/UIButton+SHExtension.{h,m}"
     end
 
     s.subspec 'UIColor' do |ss|
@@ -38,7 +38,6 @@ Pod::Spec.new do |s|
     s.subspec 'UIButton' do |ss|
         ss.source_files = "SHExtension/UIButton+SHExtension.{h,m}"
     end
-    
 
     s.subspec 'Tool' do |ss|
         ss.source_files = "SHExtension/SHTool.{h,m}"

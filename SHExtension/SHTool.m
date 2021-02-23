@@ -79,11 +79,11 @@
 
 #pragma mark 获取即时时间
 + (NSString *)getInstantTimeWithMs:(NSString *)ms{
-    if (!ms.length) {
-        return @"";
-    }
     if (ms.length == 10) {
         ms = [NSString stringWithFormat:@"%@000",ms];
+    }
+    if (ms.length != 13) {
+        return @"";
     }
     //转时间
     NSString *time = [self getTimeMsWithMs:ms format:sh_fomat_1];
