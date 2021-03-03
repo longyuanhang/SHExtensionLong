@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
     s.version      = "1.2.0"
     s.summary      = "常用类别方法，拓展"
     s.license      = "MIT"
-    s.authors      = { "CCSH" => "17600075339@qq.com" }
+    s.authors      = { "CCSH" => "624089195@qq.com" }
     s.platform     = :ios, "8.0"
     s.requires_arc = true
     s.homepage     = "https://github.com/CCSH/SHExtension"
