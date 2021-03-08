@@ -39,6 +39,12 @@
     
     str = [SHTool handleVideoTime:@"1234"];
     NSLog(@"===%@",str);
+    
+    UIView *view = [[UIView alloc]init];
+    view.size = CGSizeMake(100, 100);
+    view.backgroundColor = [UIColor redColor];
+    [self.view addSubview:view];
+    view.dragEdge = UIEdgeInsetsMake(10, 10, 10, 10);
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
