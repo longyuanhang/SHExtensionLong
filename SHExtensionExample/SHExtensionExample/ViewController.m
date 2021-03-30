@@ -26,13 +26,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     NSLog(@"表情===%i",@"哈哈😄".isEmoji);
+    
     [[UIImage imageNamed:@"1.jpeg"] imageCompressionWithByte:10*1024];
+    
     [[UIImage imageNamed:@"2"] imageColorWithBlock:^(NSString *colorString) {
         if (colorString) {
             self.view.backgroundColor = [UIColor colorWithHexString:colorString];
         }
     }];
-    [self.btn imageDirection:SHButtonImageDirection_top space:10];
+    
+    [self.btn setTitle:@"123456789087654321345678654321" forState:UIControlStateNormal];
+    [self.btn setImage:[[UIImage imageNamed:@"2.png"] imageWithSize:CGSizeMake(40, 30)] forState:UIControlStateNormal];
+    [self.btn imageDirection:SHButtonImageDirection_right space:10];
 
     NSString *str = [SHTool getInstantTimeWithMs:@"1610672356291"];
     NSLog(@"===%@",str);
@@ -44,7 +49,7 @@
     view.size = CGSizeMake(100, 100);
     view.backgroundColor = [UIColor redColor];
     [self.view addSubview:view];
-    view.dragEdge = UIEdgeInsetsMake(10, 10, 10, 10);
+    view.dragEdge = UIEdgeInsetsMake(10, 10, 10, kSHWidth - view.width - 10);
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
