@@ -50,6 +50,19 @@
     view.backgroundColor = [UIColor redColor];
     [self.view addSubview:view];
     view.dragEdge = UIEdgeInsetsMake(10, 10, 10, kSHWidth - view.width - 10);
+    view.dragBlock = ^(UIView * _Nonnull dragView) {
+        [UIView animateWithDuration:0.1 animations:^{
+            dragView.x = kSHWidth - view.width - 10;
+            CGFloat view_y = 10;
+            if (dragView.y < view_y) {
+                dragView.y = view_y;
+            }
+            view_y = self.view.height - dragView.height - 10;
+            if (view.y > view_y) {
+                dragView.y = view_y;
+            }
+        }];
+    };
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
