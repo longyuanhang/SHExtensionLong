@@ -190,12 +190,30 @@ static UIPanGestureRecognizer *_panGesture;
     }
 }
 
+#pragma mark 按照图片剪裁视图
+- (void)setClippingImage:(UIImage *)clippingImage{
+    dispatch_async(dispatch_get_main_queue(), ^{
+
+        CALayer *maskLayer = [CALayer layer];
+        maskLayer.frame = self.bounds;
+
+        [maskLayer setContents:(id)clippingImage.CGImage];
+        [maskLayer setContentsScale:clippingImage.scale];
+
+        self.layer.mask = maskLayer;
+    });
+}
+
 #pragma mark 关闭拖拽
 - (void)closeDrag{
     [self removeGestureRecognizer:_panGesture];
 }
 
 #pragma mark - 描边
+- (void)borderRadius:(CGFloat)radius{
+    [self borderRadius:radius width:0 color:[UIColor clearColor]];
+}
+
 - (void)borderRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color{
     
     [self.layer setBorderWidth:(width)];

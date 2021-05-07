@@ -63,6 +63,13 @@
             }
         }];
     };
+    
+    UIView *view1 = [[UIView alloc]init];
+    view1.frame = CGRectMake(100, 100, 100, 100);
+    view1.backgroundColor = [UIColor redColor];
+    [self.view addSubview:view1];
+    [view1 makeMaskViewWithImage:[UIImage imageNamed:@"2.png"]];
+//    view1.clippingImage = [UIImage imageNamed:@"2.png"];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
