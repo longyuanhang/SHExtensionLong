@@ -70,6 +70,14 @@
     [self.view addSubview:view1];
     [view1 makeMaskViewWithImage:[UIImage imageNamed:@"2.png"]];
 //    view1.clippingImage = [UIImage imageNamed:@"2.png"];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.size = CGSizeMake(40, 40);
+    btn.backgroundColor = [UIColor orangeColor];
+    [btn addClickBlock:^(UIButton * _Nonnull btn) {
+        
+    }];
+    [self.view addSubview:btn];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
