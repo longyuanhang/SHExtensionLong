@@ -7,6 +7,7 @@
 //
 
 #import "UIButton+SHExtension.h"
+#import <objc/runtime.h>
 
 @implementation UIButton (SHExtension)
 
@@ -62,13 +63,22 @@ static BtnBlock _callBack;
 
 #pragma mark - 添加事件
 - (void)addAction:(UIControlEvents)events block:(BtnBlock)block{
-    _callBack = block;
+    [self setCallBack:block];
     [self addTarget:self action:@selector(btnAction:) forControlEvents:events];
 }
 
+- (void)setCallBack:(BtnBlock)callBack {
+    objc_setAssociatedObject(self, &_callBack, callBack, OBJC_ASSOCIATION_COPY);
+}
+
+- (BtnBlock)callBack {
+    return objc_getAssociatedObject(self, &_callBack);
+}
+
+
 - (void)btnAction:(UIButton *)btn{
-    if (_callBack) {
-        _callBack(btn);
+    if (self.callBack) {
+        self.callBack(btn);
     }
 }
 
