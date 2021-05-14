@@ -11,7 +11,6 @@
 
 @implementation UIButton (SHExtension)
 
-static BtnBlock _callBack;
 
 - (void)imageDirection:(SHButtonImageDirection)direction space:(CGFloat)space {
     CGFloat imageWidth, imageHeight, textWidth, textHeight, x, y;
@@ -56,30 +55,6 @@ static BtnBlock _callBack;
     return UIEdgeInsetsMake(point.x, point.y, -point.x, -point.y);
 }
 
-#pragma mark - 添加点击
-- (void)addClickBlock:(BtnBlock)block{
-    [self addAction:UIControlEventTouchUpInside block:block];
-}
 
-#pragma mark - 添加事件
-- (void)addAction:(UIControlEvents)events block:(BtnBlock)block{
-    [self setCallBack:block];
-    [self addTarget:self action:@selector(btnAction:) forControlEvents:events];
-}
-
-- (void)setCallBack:(BtnBlock)callBack {
-    objc_setAssociatedObject(self, &_callBack, callBack, OBJC_ASSOCIATION_COPY);
-}
-
-- (BtnBlock)callBack {
-    return objc_getAssociatedObject(self, &_callBack);
-}
-
-
-- (void)btnAction:(UIButton *)btn{
-    if (self.callBack) {
-        self.callBack(btn);
-    }
-}
 
 @end

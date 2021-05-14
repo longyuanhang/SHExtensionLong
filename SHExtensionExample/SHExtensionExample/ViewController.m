@@ -13,6 +13,7 @@
 #import "UIImage+SHExtension.h"
 #import "SHTool.h"
 #import "UIButton+SHExtension.h"
+#import "SHButton.h"
 
 @interface ViewController ()<UITextFieldDelegate>
 
@@ -71,7 +72,7 @@
     [view1 makeMaskViewWithImage:[UIImage imageNamed:@"2.png"]];
 //    view1.clippingImage = [UIImage imageNamed:@"2.png"];
     
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    SHButton *btn = [[SHButton alloc]init];
     btn.size = CGSizeMake(40, 40);
     btn.backgroundColor = [UIColor orangeColor];
     [btn addClickBlock:^(UIButton * _Nonnull btn) {
