@@ -135,6 +135,16 @@ static UIPanGestureRecognizer *_panGesture;
     [self configPan];
 }
 
+- (void)setDragBlock:(DragBlock)dragBlock{
+    _dragBlock = dragBlock;
+    [self configPan];
+}
+
+- (void)setDragingBlock:(DragBlock)dragingBlock{
+    _dragingBlock = dragingBlock;
+    [self configPan];
+}
+
 - (UIPanGestureRecognizer *)callBack {
     return objc_getAssociatedObject(self, &_panGesture);
 }
