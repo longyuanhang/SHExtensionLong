@@ -7,11 +7,13 @@
 //
 
 #import "UIView+SHExtension.h"
+#import "objc/runtime.h"
 
 @implementation UIView (SHExtension)
 
 static UIEdgeInsets _dragEdge;
 static DragBlock _dragBlock;
+static DragBlock _dragingBlock;
 static UIPanGestureRecognizer *_panGesture;
 
 #pragma mark - frame
@@ -133,34 +135,37 @@ static UIPanGestureRecognizer *_panGesture;
     [self configPan];
 }
 
-- (void)setDragBlock:(DragBlock)dragBlock{
-    _dragBlock = dragBlock;
-    [self configPan];
+- (UIPanGestureRecognizer *)callBack {
+    return objc_getAssociatedObject(self, &_panGesture);
 }
 
-- (void)configPan{
-    if (!_panGesture) {
-        _panGesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panAction:)];
-        [self addGestureRecognizer:_panGesture];
-    }
-}
+ - (void)configPan{
+     if (!_panGesture) {
+         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panAction:)];
+         [self addGestureRecognizer:pan];
+         objc_setAssociatedObject(self, &_panGesture, pan, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+     }
+ }
+ 
+ #pragma mark - 拖拽
+ - (void)panAction:(UIPanGestureRecognizer *)pan{
 
-
-#pragma mark - 拖拽
-- (void)panAction:(UIPanGestureRecognizer *)pan{
-
-    switch (pan.state) {
-        case UIGestureRecognizerStateChanged:
-        {
-            CGPoint point = [pan locationInView:self.superview];
-            pan.view.center = point;
-        }
-            break;
-        case UIGestureRecognizerStateEnded:
-        {
-            if (_dragBlock) {
+     switch (pan.state) {
+         case UIGestureRecognizerStateChanged:
+         {
+              CGPoint point = [pan locationInView:self.superview];
+              pan.view.center = point;
+            if (_dragingBlock) {
+               _dragingBlock(self);
+            }
+         }
+             break;
+         case UIGestureRecognizerStateEnded:
+         {
+             if (_dragBlock) {
                 _dragBlock(pan.view);
-            }else{
+                _dragBlock(self);
+             }else{
                 CGFloat x = self.x;
                 CGFloat y = self.y;
                 //X轴
