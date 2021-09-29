@@ -205,6 +205,11 @@ static UIPanGestureRecognizer *_panGesture;
     }
 }
 
+#pragma mark 关闭拖拽
+- (void)closeDrag{
+    [self removeGestureRecognizer:_panGesture];
+}
+
 #pragma mark 按照图片剪裁视图
 - (void)setClippingImage:(UIImage *)clippingImage{
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -217,11 +222,6 @@ static UIPanGestureRecognizer *_panGesture;
 
         self.layer.mask = maskLayer;
     });
-}
-
-#pragma mark 关闭拖拽
-- (void)closeDrag{
-    [self removeGestureRecognizer:_panGesture];
 }
 
 #pragma mark - 描边
