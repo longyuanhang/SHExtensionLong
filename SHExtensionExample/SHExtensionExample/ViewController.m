@@ -38,7 +38,7 @@
     
     [self.btn setTitle:@"123456789087654321345678654321" forState:UIControlStateNormal];
     [self.btn setImage:[[UIImage imageNamed:@"2.png"] imageWithSize:CGSizeMake(40, 30)] forState:UIControlStateNormal];
-    [self.btn imageDirection:SHButtonImageDirection_right space:10];
+//    [self.btn imageDirection:SHButtonImageDirection_right space:10];
 
     NSString *str = [SHTool getInstantTimeWithMs:@"1610672356291"];
     NSLog(@"===%@",str);
