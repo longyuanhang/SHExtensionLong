@@ -130,6 +130,11 @@ static UIPanGestureRecognizer *_panGesture;
     return image;
 }
 
+#pragma mark 复制视图
+- (UIView *)sh_copy{
+    return [self copy_obj:self];
+}
+
 - (void)setDragEdge:(UIEdgeInsets)dragEdge{
     _dragEdge = dragEdge;
     [self configPan];
@@ -299,6 +304,12 @@ static UIPanGestureRecognizer *_panGesture;
     });
 }
 
+#pragma mark 复制
+- (id)copy_obj:(id)obj{
+    NSData *temp = [NSKeyedArchiver archivedDataWithRootObject:obj];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:temp];
+}
+
 #pragma mark - xib 属性
 #pragma mark 加载xib
 + (instancetype)loadXib{
@@ -338,7 +349,7 @@ static UIPanGestureRecognizer *_panGesture;
     return self.layer.cornerRadius;
 }
 
-#pragma mark剪切
+#pragma mark 剪切
 - (void)setMasksToBounds:(BOOL)masksToBounds{
     self.layer.masksToBounds = masksToBounds;
 }

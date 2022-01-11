@@ -46,6 +46,8 @@ IBInspectable
 @property (nonatomic, strong, readonly) UIViewController *sh_vc;
 //视图生成图片
 @property (nonatomic, strong, readonly) UIImage *sh_img;
+//复制视图
+@property (nonatomic, strong, readonly) UIView *sh_copy;
 
 //拖拽 使用下方一个就好
 //设置拖拽边距
@@ -71,6 +73,9 @@ IBInspectable
 
 #pragma mark 按照图片裁剪视图
 - (void)makeMaskViewWithImage:(UIImage *)image;
+
+#pragma mark 复制
+- (id)copy_obj:(id)obj;
 
 #pragma mark - xib 属性
 //加载xib
