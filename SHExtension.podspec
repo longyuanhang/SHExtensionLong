@@ -47,4 +47,8 @@ Pod::Spec.new do |s|
         ss.source_files = "SHExtension/NSArray+SHExtension.{h,m}","SHExtension/NSDictionary+SHExtension.{h,m}"
     end
 
+    s.subspec 'Exception' do |ss|
+        ss.source_files = "SHExtension/SHUncaughtExceptionHandler.{h,m}"
+    end
+
 end

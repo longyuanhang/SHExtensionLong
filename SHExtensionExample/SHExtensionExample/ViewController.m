@@ -27,6 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     NSLog(@"表情===%i",@"哈哈😄".isEmoji);
+
     
     [[UIImage imageNamed:@"1.jpeg"] imageCompressionWithByte:10*1024];
     
@@ -87,6 +88,12 @@
     [SHTool handleTextField:textField shouldChangeCharactersInRange:range replacementString:string rule:@[@3,@4,@4]];
     //设置光标位置
     return NO;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    NSArray *arr = @[@"1"];
+    
+    arr[2];
 }
 
 @end
