@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "SHExtension"
-    s.version      = "1.3.8"
+    s.version      = "1.3.9"
     s.summary      = "常用类别方法，拓展"
     s.license      = "MIT"
     s.authors      = { "CCSH" => "624089195@qq.com" }
@@ -41,6 +41,12 @@ Pod::Spec.new do |s|
 
     s.subspec 'Tool' do |ss|
         ss.source_files = "SHExtension/SHTool.{h,m}"
+    end
+    
+    s.subspec 'Safe' do |ss|
+        ss.source_files = "SHExtension/NSArray+SHExtension.{h,m}",
+        "SHExtension/NSDictionary+SHExtension.{h,m}",
+        "NSMutableDictionary+SHExtension.{h,m}"
     end
 
 end
