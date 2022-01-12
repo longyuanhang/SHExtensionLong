@@ -14,6 +14,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)safe_objectForKey:(NSString *)key;
 
+- (void)safe_setValue:(id)value forKey:(NSString *)key;
+
 @end
+
+@interface NSMutableDictionary (SHExtension)
+
+- (void)safe_removeObjectForKey:(NSString *)key;
+
+@end
+
 
 NS_ASSUME_NONNULL_END

@@ -44,7 +44,7 @@ Pod::Spec.new do |s|
     end
     
     s.subspec 'Safe' do |ss|
-        ss.source_files = "SHExtension/NSArray+SHExtension.{h,m}","SHExtension/NSDictionary+SHExtension.{h,m}","NSMutableDictionary+SHExtension.{h,m}"
+        ss.source_files = "SHExtension/NSArray+SHExtension.{h,m}","SHExtension/NSDictionary+SHExtension.{h,m}"
     end
 
 end

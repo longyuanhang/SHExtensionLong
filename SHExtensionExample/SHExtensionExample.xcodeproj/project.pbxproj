@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5C31955B278E68D800701F5C /* NSArray+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C319556278E68D800701F5C /* NSArray+SHExtension.m */; };
 		5C31955C278E68D800701F5C /* NSDictionary+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C319557278E68D800701F5C /* NSDictionary+SHExtension.m */; };
-		5C31955D278E68D800701F5C /* NSMutableDictionary+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C319558278E68D800701F5C /* NSMutableDictionary+SHExtension.m */; };
 		5C73D5FA2153745E008D91D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C73D5F92153745E008D91D8 /* AppDelegate.m */; };
 		5C73D5FD2153745E008D91D8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C73D5FC2153745E008D91D8 /* ViewController.m */; };
 		5C73D6002153745E008D91D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C73D5FE2153745E008D91D8 /* Main.storyboard */; };
@@ -51,8 +50,6 @@
 		5C319555278E68D800701F5C /* NSArray+SHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+SHExtension.h"; sourceTree = "<group>"; };
 		5C319556278E68D800701F5C /* NSArray+SHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SHExtension.m"; sourceTree = "<group>"; };
 		5C319557278E68D800701F5C /* NSDictionary+SHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SHExtension.m"; sourceTree = "<group>"; };
-		5C319558278E68D800701F5C /* NSMutableDictionary+SHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+SHExtension.m"; sourceTree = "<group>"; };
-		5C319559278E68D800701F5C /* NSMutableDictionary+SHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+SHExtension.h"; sourceTree = "<group>"; };
 		5C31955A278E68D800701F5C /* NSDictionary+SHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SHExtension.h"; sourceTree = "<group>"; };
 		5C73D5F52153745E008D91D8 /* SHExtensionExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SHExtensionExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C73D5F82153745E008D91D8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -179,8 +176,6 @@
 				5C319556278E68D800701F5C /* NSArray+SHExtension.m */,
 				5C31955A278E68D800701F5C /* NSDictionary+SHExtension.h */,
 				5C319557278E68D800701F5C /* NSDictionary+SHExtension.m */,
-				5C319559278E68D800701F5C /* NSMutableDictionary+SHExtension.h */,
-				5C319558278E68D800701F5C /* NSMutableDictionary+SHExtension.m */,
 				8345736F25E4A85A00F0243F /* SHTool.h */,
 				8345737625E4A85A00F0243F /* SHTool.m */,
 				8345737A25E4A85A00F0243F /* UIView+SHExtension.h */,
@@ -340,7 +335,6 @@
 				5C31955B278E68D800701F5C /* NSArray+SHExtension.m in Sources */,
 				8345738025E4A85A00F0243F /* UIImageView+SHExtension.m in Sources */,
 				5C31955C278E68D800701F5C /* NSDictionary+SHExtension.m in Sources */,
-				5C31955D278E68D800701F5C /* NSMutableDictionary+SHExtension.m in Sources */,
 				8345738525E4A85A00F0243F /* UIImage+SHExtension.m in Sources */,
 				8345738225E4A85A00F0243F /* SHTool.m in Sources */,
 				8345738125E4A85A00F0243F /* NSString+SHExtension.m in Sources */,

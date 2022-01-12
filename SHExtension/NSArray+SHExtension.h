@@ -16,4 +16,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface NSMutableArray (SHExtension)
+
+- (void)safe_addObject:(id)anObject;
+
+- (void)safe_addObjectsFromArray:(NSArray *)otherArray;
+
+- (void)safe_removeObject:(id)anObject;
+
+@end
+
 NS_ASSUME_NONNULL_END

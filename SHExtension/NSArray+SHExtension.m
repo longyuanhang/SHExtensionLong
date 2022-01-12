@@ -11,7 +11,7 @@
 @implementation NSArray (SHExtension)
 
 - (id)safe_objectAtIndex:(NSUInteger)index{
-    id obj;
+    id obj = @"";
     @try {
         obj = [self objectAtIndex:index];
     } @catch (NSException *exception) {
@@ -22,3 +22,38 @@
 }
 
 @end
+
+@implementation NSMutableArray (SHExtension)
+
+- (void)safe_addObject:(id)anObject{
+    @try {
+        [self addObject:anObject];
+    } @catch (NSException *exception) {
+        NSLog(@"数组报错：%@",exception.description);
+    } @finally {
+        
+    }
+}
+
+- (void)safe_addObjectsFromArray:(NSArray *)otherArray{
+    @try {
+        [self addObjectsFromArray:otherArray];
+    } @catch (NSException *exception) {
+        NSLog(@"数组报错：%@",exception.description);
+    } @finally {
+        
+    }
+}
+
+- (void)safe_removeObject:(id)anObject{
+    @try {
+        [self removeObject:anObject];
+    } @catch (NSException *exception) {
+        NSLog(@"数组报错：%@",exception.description);
+    } @finally {
+        
+    }
+}
+
+@end
+

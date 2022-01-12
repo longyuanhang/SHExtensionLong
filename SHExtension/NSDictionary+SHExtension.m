@@ -21,5 +21,28 @@
     }
 }
 
+- (void)safe_setValue:(id)value forKey:(NSString *)key{
+    @try {
+        [self setValue:value forKey:key];
+    } @catch (NSException *exception) {
+        NSLog(@"字典报错：%@",exception.description);
+    } @finally {
+        
+    }
+}
+
+@end
+
+@implementation NSMutableDictionary (SHExtension)
+
+- (void)safe_removeObjectForKey:(NSString *)key{
+    @try {
+        [self removeObjectForKey:key];
+    } @catch (NSException *exception) {
+        NSLog(@"字典报错：%@",exception.description);
+    } @finally {
+        
+    }
+}
 
 @end
