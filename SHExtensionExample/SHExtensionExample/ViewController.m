@@ -90,10 +90,4 @@
     return NO;
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    NSArray *arr = @[@"1"];
-    
-    arr[2];
-}
-
 @end
