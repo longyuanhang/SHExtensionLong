@@ -67,11 +67,21 @@
     };
     
     UIView *view1 = [[UIView alloc]init];
-    view1.frame = CGRectMake(100, 100, 100, 100);
-    view1.backgroundColor = [UIColor redColor];
+    view1.frame = CGRectMake(150, 100, 100, 100);
+    view1.backgroundColor = [UIColor greenColor];
     [self.view addSubview:view1];
     [view1 makeMaskViewWithImage:[UIImage imageNamed:@"2.png"]];
-//    view1.clippingImage = [UIImage imageNamed:@"2.png"];
+    
+    UIView *view2 = [[UIView alloc]init];
+    view2.frame = CGRectMake(150, 250, 100, 50);
+    view2.backgroundColor = [UIColor purpleColor];
+    [self.view addSubview:view2];
+    
+    view2.shadowColor = [UIColor redColor];
+    view2.shadowOpacity = 1;
+    view2.shadowRadius = 10;
+    view2.shadowOffset = CGSizeMake(0, 0);
+    view2.shadowType = SHViewShadowType_bottom;
     
     SHButton *btn = [[SHButton alloc]init];
     btn.size = CGSizeMake(40, 40);
@@ -80,6 +90,7 @@
         
     }];
     [self.view addSubview:btn];
+
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

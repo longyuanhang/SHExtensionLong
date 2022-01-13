@@ -14,16 +14,26 @@ NS_ASSUME_NONNULL_BEGIN
 #define kSHHeight ([UIScreen mainScreen].bounds.size.height)
 
 //回调 拖拽结束
-typedef void(^DragBlock)(UIView *dragView);
+typedef void (^DragBlock)(UIView *dragView);
+
+//阴影位置
+typedef enum : NSUInteger {
+    SHViewShadowType_center = 1,
+    SHViewShadowType_top,
+    SHViewShadowType_left,
+    SHViewShadowType_bottom,
+    SHViewShadowType_right,
+} SHViewShadowType;
 
 IBInspectable
 
-@interface UIView (SHExtension)
+    @interface
+    UIView(SHExtension)
 
 #pragma mark - frame
-//X轴
+// X轴
 @property (nonatomic, assign) CGFloat x;
-//Y轴
+// Y轴
 @property (nonatomic, assign) CGFloat y;
 //右边X轴
 @property (nonatomic, assign, readonly) CGFloat maxX;
@@ -83,22 +93,27 @@ IBInspectable
 
 // 注意: 加上IBInspectable就可以可视化显示相关的属性
 //圆角弧度
-@property (nonatomic, assign)IBInspectable CGFloat cornerRadius;
+@property (nonatomic, assign) IBInspectable CGFloat cornerRadius;
 //边框宽度
-@property (nonatomic, assign)IBInspectable CGFloat borderWidth;
+@property (nonatomic, assign) IBInspectable CGFloat borderWidth;
 //边框颜色
-@property (nonatomic, strong)IBInspectable UIColor *borderColor;
+@property (nonatomic, strong) IBInspectable UIColor *borderColor;
 //剪切
-@property (nonatomic, assign)IBInspectable BOOL masksToBounds;
+@property (nonatomic, assign) IBInspectable BOOL masksToBounds;
 //阴影相关
 //阴影颜色
-@property (nonatomic, strong)IBInspectable UIColor *shadowColor;
+@property (nonatomic, strong) IBInspectable UIColor *shadowColor;
 //阴影偏移
-@property (nonatomic, assign)IBInspectable CGSize shadowOffset;
+@property (nonatomic, assign) IBInspectable CGSize shadowOffset;
 //阴影透明度
-@property (nonatomic, assign)IBInspectable CGFloat shadowOpacity;
+@property (nonatomic, assign) IBInspectable CGFloat shadowOpacity;
 //阴影半径
-@property (nonatomic, assign)IBInspectable CGFloat shadowRadius;
+@property (nonatomic, assign) IBInspectable CGFloat shadowRadius;
+//阴影路径
+@property (nonatomic, assign) IBInspectable CGPathRef shadowPath;
+
+//阴影位置
+@property (nonatomic, assign) IBInspectable SHViewShadowType shadowType;
 
 @end
 

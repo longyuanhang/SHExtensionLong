@@ -118,8 +118,7 @@ static UIPanGestureRecognizer *_panGesture;
 }
 
 #pragma mark 通过视图获取一张图片
-- (UIImage *)sh_img{
-    
+- (UIImage *)sh_img {
     UIGraphicsBeginImageContextWithOptions(self.size, NO, 0);
     
     [self.layer renderInContext:UIGraphicsGetCurrentContext()];
@@ -131,21 +130,21 @@ static UIPanGestureRecognizer *_panGesture;
 }
 
 #pragma mark 复制视图
-- (UIView *)sh_copy{
+- (UIView *)sh_copy {
     return [self copy_obj:self];
 }
 
-- (void)setDragEdge:(UIEdgeInsets)dragEdge{
+- (void)setDragEdge:(UIEdgeInsets)dragEdge {
     _dragEdge = dragEdge;
     [self configPan];
 }
 
-- (void)setDragBlock:(DragBlock)dragBlock{
+- (void)setDragBlock:(DragBlock)dragBlock {
     _dragBlock = dragBlock;
     [self configPan];
 }
 
-- (void)setDragingBlock:(DragBlock)dragingBlock{
+- (void)setDragingBlock:(DragBlock)dragingBlock {
     _dragingBlock = dragingBlock;
     [self configPan];
 }
@@ -154,96 +153,89 @@ static UIPanGestureRecognizer *_panGesture;
     return objc_getAssociatedObject(self, &_panGesture);
 }
 
- - (void)configPan{
-     if (!_panGesture) {
-         UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panAction:)];
-         [self addGestureRecognizer:pan];
-         objc_setAssociatedObject(self, &_panGesture, pan, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-     }
- }
- 
- #pragma mark - 拖拽
- - (void)panAction:(UIPanGestureRecognizer *)pan{
+- (void)configPan {
+    if (!_panGesture) {
+        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
+        [self addGestureRecognizer:pan];
+        objc_setAssociatedObject(self, &_panGesture, pan, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+}
 
-     switch (pan.state) {
-         case UIGestureRecognizerStateChanged:
-         {
-              CGPoint point = [pan locationInView:self.superview];
-              pan.view.center = point;
+#pragma mark - 拖拽
+- (void)panAction:(UIPanGestureRecognizer *)pan {
+    switch (pan.state) {
+        case UIGestureRecognizerStateChanged: {
+            CGPoint point = [pan locationInView:self.superview];
+            pan.view.center = point;
             if (_dragingBlock) {
-               _dragingBlock(self);
+                _dragingBlock(self);
             }
-         }
-             break;
-         case UIGestureRecognizerStateEnded:
-         {
-             if (_dragBlock) {
+        } break;
+        case UIGestureRecognizerStateEnded: {
+            if (_dragBlock) {
                 _dragBlock(pan.view);
                 _dragBlock(self);
-             }else{
+            } else {
                 CGFloat x = self.x;
                 CGFloat y = self.y;
-                //X轴
+                // X轴
                 if (self.x < _dragEdge.left) {
                     x = _dragEdge.left;
                 }
                 if (self.maxX > self.superview.maxX - _dragEdge.right) {
                     x = self.superview.maxX - _dragEdge.right - self.width;
                 }
-
-                //Y轴
+                
+                // Y轴
                 if (self.y < _dragEdge.top) {
                     y = _dragEdge.top;
                 }
                 if (self.maxY > self.superview.maxY - _dragEdge.bottom) {
                     y = self.superview.maxY - _dragEdge.bottom - self.height;
                 }
-
-                [UIView animateWithDuration:0.1 animations:^{
+                
+                [UIView animateWithDuration:0.1
+                                 animations:^{
                     self.origin = CGPointMake(x, y);
                 }];
             }
-        }
-            break;
+        } break;
         default:
             break;
     }
 }
 
 #pragma mark 关闭拖拽
-- (void)closeDrag{
+- (void)closeDrag {
     [self removeGestureRecognizer:_panGesture];
 }
 
 #pragma mark 按照图片剪裁视图
-- (void)setClippingImage:(UIImage *)clippingImage{
+- (void)setClippingImage:(UIImage *)clippingImage {
     dispatch_async(dispatch_get_main_queue(), ^{
-
         CALayer *maskLayer = [CALayer layer];
         maskLayer.frame = self.bounds;
-
+        
         [maskLayer setContents:(id)clippingImage.CGImage];
         [maskLayer setContentsScale:clippingImage.scale];
-
+        
         self.layer.mask = maskLayer;
     });
 }
 
 #pragma mark - 描边
-- (void)borderRadius:(CGFloat)radius{
+- (void)borderRadius:(CGFloat)radius {
     [self borderRadius:radius width:0 color:[UIColor clearColor]];
 }
 
-- (void)borderRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color{
-    
+- (void)borderRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color {
     [self.layer setBorderWidth:(width)];
     [self.layer setCornerRadius:(radius)];
     [self.layer setBorderColor:[color CGColor]];
     [self.layer setMasksToBounds:YES];
 }
 
-- (void)borderRadius:(CGFloat)radius corners:(UIRectCorner)corners{
-    
+- (void)borderRadius:(CGFloat)radius corners:(UIRectCorner)corners {
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(radius, radius)];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.frame = self.bounds;
@@ -252,9 +244,8 @@ static UIPanGestureRecognizer *_panGesture;
 }
 
 #pragma mark - 获取一个渐变色的视图
-+ (UIView *)getGradientViewWithSize:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint colorArr:(NSArray *)colorArr{
-    
-    UIView *view = [[UIView alloc]init];
++ (UIView *)getGradientViewWithSize:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint colorArr:(NSArray *)colorArr {
+    UIView *view = [[UIView alloc] init];
     view.size = size;
     //  CAGradientLayer类对其绘制渐变背景颜色、填充层的形状(包括圆角)
     CAGradientLayer *gradientLayer = [CAGradientLayer layer];
@@ -267,13 +258,13 @@ static UIPanGestureRecognizer *_panGesture;
     gradientLayer.endPoint = endPoint;
     
     // 设置渐变位置
-    CGFloat loc = 1.0/(colorArr.count - 1);
-    NSMutableArray *location = [[NSMutableArray alloc]init];
+    CGFloat loc = 1.0 / (colorArr.count - 1);
+    NSMutableArray *location = [[NSMutableArray alloc] init];
     [location addObject:@0];
     NSInteger index = 1;
     
     while (index != colorArr.count) {
-        [location addObject:[NSNumber numberWithFloat:index*loc]];
+        [location addObject:[NSNumber numberWithFloat:index * loc]];
         index++;
     }
     
@@ -287,16 +278,14 @@ static UIPanGestureRecognizer *_panGesture;
 
 #pragma mark 按照图片裁剪视图
 - (void)makeMaskViewWithImage:(UIImage *)image {
-    
     dispatch_async(dispatch_get_main_queue(), ^{
-        
         CALayer *maskLayer = [CALayer layer];
         maskLayer.frame = self.bounds;
         //把视图设置成图片的样子
         [maskLayer setContents:(id)image.CGImage];
         [maskLayer setContentsScale:image.scale];
-        [maskLayer setContentsCenter:CGRectMake(((image.size.width/2) - 1)/image.size.width,
-                                                ((image.size.height/1.5) - 1)/image.size.height,
+        [maskLayer setContentsCenter:CGRectMake(((image.size.width / 2) - 1) / image.size.width,
+                                                ((image.size.height / 1.5) - 1) / image.size.height,
                                                 1 / image.size.width,
                                                 1 / image.size.height)];
         
@@ -305,94 +294,130 @@ static UIPanGestureRecognizer *_panGesture;
 }
 
 #pragma mark 复制
-- (id)copy_obj:(id)obj{
+- (id)copy_obj:(id)obj {
     NSData *temp = [NSKeyedArchiver archivedDataWithRootObject:obj];
     return [NSKeyedUnarchiver unarchiveObjectWithData:temp];
 }
 
 #pragma mark - xib 属性
 #pragma mark 加载xib
-+ (instancetype)loadXib{
++ (instancetype)loadXib {
     NSString *className = NSStringFromClass(self);
     return [[[NSBundle mainBundle] loadNibNamed:className owner:nil options:nil] firstObject];
 }
 
 #pragma mark 设置边框宽度
 - (void)setBorderWidth:(CGFloat)borderWidth {
-    
-    if (borderWidth < 0) return;
+    if (borderWidth < 0)
+        return;
     self.layer.borderWidth = borderWidth;
 }
 
-- (CGFloat)borderWidth{
+- (CGFloat)borderWidth {
     return self.layer.borderWidth;
 }
 
 #pragma mark 设置边框颜色
 - (void)setBorderColor:(UIColor *)borderColor {
-    
     self.layer.borderColor = borderColor.CGColor;
 }
 
-- (UIColor *)borderColor{
+- (UIColor *)borderColor {
     return [UIColor colorWithCGColor:self.layer.borderColor];
 }
 
 #pragma mark 设置圆角
 - (void)setCornerRadius:(CGFloat)cornerRadius {
-    
     self.layer.cornerRadius = cornerRadius;
     self.layer.masksToBounds = cornerRadius > 0;
 }
 
-- (CGFloat)cornerRadius{
+- (CGFloat)cornerRadius {
     return self.layer.cornerRadius;
 }
 
 #pragma mark 剪切
-- (void)setMasksToBounds:(BOOL)masksToBounds{
+- (void)setMasksToBounds:(BOOL)masksToBounds {
     self.layer.masksToBounds = masksToBounds;
 }
 
-- (BOOL)masksToBounds{
+- (BOOL)masksToBounds {
     return self.layer.masksToBounds;
 }
 
 #pragma mark 阴影颜色
-- (void)setShadowColor:(UIColor *)shadowColor{
+- (void)setShadowColor:(UIColor *)shadowColor {
     self.layer.shadowColor = shadowColor.CGColor;
 }
 
-- (UIColor *)shadowColor{
+- (UIColor *)shadowColor {
     return [UIColor colorWithCGColor:self.layer.shadowColor];
 }
 
 #pragma mark 阴影偏移
-- (void)setShadowOffset:(CGSize)shadowOffset{
-    
+- (void)setShadowOffset:(CGSize)shadowOffset {
     self.layer.shadowOffset = shadowOffset;
 }
 
-- (CGSize)shadowOffset{
+- (CGSize)shadowOffset {
     return self.layer.shadowOffset;
 }
 
 #pragma mark 阴影透明度
-- (void)setShadowOpacity:(CGFloat)shadowOpacity{
+- (void)setShadowOpacity:(CGFloat)shadowOpacity {
     self.layer.shadowOpacity = shadowOpacity;
 }
 
-- (CGFloat)shadowOpacity{
+- (CGFloat)shadowOpacity {
     return self.layer.shadowOpacity;
 }
 
 #pragma mark 阴影半径
-- (void)setShadowRadius:(CGFloat)shadowRadius{
+- (void)setShadowRadius:(CGFloat)shadowRadius {
     self.layer.shadowRadius = shadowRadius;
 }
 
-- (CGFloat)shadowRadius{
+- (CGFloat)shadowRadius {
     return self.layer.shadowRadius;
+}
+
+#pragma mark 阴影路径
+- (void)setShadowPath:(CGPathRef)shadowPath {
+    self.layer.shadowPath = shadowPath;
+}
+
+- (CGPathRef)shadowPath {
+    return self.layer.shadowPath;
+}
+
+#pragma mark 阴影位置
+- (void)setShadowType:(SHViewShadowType)shadowType {
+    CGRect frame = self.bounds;
+    
+    CGFloat space = self.shadowRadius / 4;
+    
+    switch (shadowType) {
+        case SHViewShadowType_top: {
+            frame = CGRectMake(space, -self.shadowRadius / 2, self.width - 2 * space, self.shadowRadius);
+        } break;
+        case SHViewShadowType_bottom: {
+            frame = CGRectMake(space, self.height - self.shadowRadius / 2, self.width - 2 * space, self.shadowRadius);
+        } break;
+        case SHViewShadowType_left: {
+            frame = CGRectMake(-self.shadowRadius / 2, space, self.shadowRadius, self.height - 2 * space);
+        } break;
+        case SHViewShadowType_right: {
+            frame = CGRectMake(self.width - self.shadowRadius / 2, space, self.shadowRadius, self.height - 2 * space);
+        } break;
+        default:
+            break;
+    }
+    
+    self.shadowPath = [UIBezierPath bezierPathWithRect:frame].CGPath;
+}
+
+- (SHViewShadowType)shadowType {
+    return SHViewShadowType_center;
 }
 
 @end
