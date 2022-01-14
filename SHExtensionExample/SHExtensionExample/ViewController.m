@@ -84,13 +84,21 @@
     view2.shadowType = SHViewShadowType_bottom;
     
     SHButton *btn = [[SHButton alloc]init];
+    btn.timeInterval = 2;
+    btn.y = 100;
+    btn.x = 100;
     btn.size = CGSizeMake(40, 40);
     btn.backgroundColor = [UIColor orangeColor];
+//    [btn addTarget:self action:@selector(btnAction) forControlEvents:UIControlEventTouchUpInside];
     [btn addClickBlock:^(UIButton * _Nonnull btn) {
-        
+        NSLog(@"点击了！！！！");
     }];
     [self.view addSubview:btn];
 
+}
+
+- (void)btnAction{
+    NSLog(@"点击了！！！！");
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

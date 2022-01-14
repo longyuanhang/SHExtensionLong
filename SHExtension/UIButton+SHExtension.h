@@ -18,10 +18,21 @@ typedef enum : NSUInteger {
     SHButtonImageDirection_bottom,
 } SHButtonImageDirection;
 
+typedef void(^BtnBlock)(UIButton *btn);
+
 @interface UIButton (SHExtension)
 
+//点击时间间隔
+@property (nonatomic, assign) NSTimeInterval timeInterval;
+
+#pragma mark - 图片位置
 - (void)imageDirection:(SHButtonImageDirection)direction space:(CGFloat)space;
 
+#pragma mark - 添加点击
+- (void)addClickBlock:(BtnBlock)block;
+
+#pragma mark - 添加事件
+- (void)addAction:(UIControlEvents)events block:(BtnBlock)block;
 
 @end
 
