@@ -272,6 +272,76 @@
     return [UIImage getImageWithLayer:gradientLayer];
 }
 
+#pragma mark 根据路径生成图片
++ (UIImage *)getImageWithSize:(CGSize)size path:(CGPathRef)path color:(UIColor *)color{
+    UIImage *image = nil;
+
+    CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();
+    
+    CGContextRef context = CGBitmapContextCreate(NULL,
+                                                 size.width,
+                                                 size.height,
+                                                 8,
+                                                 0,
+                                                 rgb,
+                                                 (kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Little));
+    
+    // STEP 1.
+    CGContextTranslateCTM(context, 0, size.height);
+    CGContextScaleCTM(context, 1.0f, -1.0f);
+    
+    CGContextSaveGState(context);
+    CGContextAddPath(context, path);
+    CGContextSetRGBStrokeColor(context, 0, 0, 0, 0);
+    NSArray *arr = [self rgbArr:color];
+    CGContextSetRGBFillColor(context, [arr[0] floatValue], [arr[1] floatValue], [arr[2] floatValue], [arr[3] floatValue]);
+    CGContextSetRGBStrokeColor(context, 0, 0, 0, 0.0f);
+    CGContextDrawPath(context, kCGPathFill);
+    CGContextRestoreGState(context);
+    
+    // STEP 2.构建图像
+    CGImageRef imageRef = CGBitmapContextCreateImage(context);
+    image = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    
+    CGContextRelease(context);
+    CGColorSpaceRelease(rgb);
+    CGPathRelease(path);
+    
+    return image;
+}
+
+#pragma mark 获取颜色RGB
++ (NSArray *)rgbArr:(UIColor *)color{
+    
+    //获得RGB值描述
+    NSString *RGBValue = [NSString stringWithFormat:@"%@",color];
+    //将RGB值描述分隔成字符串
+    NSArray *RGBArr = [RGBValue componentsSeparatedByString:@" "];
+    
+    if (RGBArr.count == 3) {
+        RGBArr = @[RGBArr[1],RGBArr[1],RGBArr[1],RGBArr[2]];
+    }else{
+        RGBArr = @[RGBArr[1],RGBArr[2],RGBArr[3],RGBArr[4]];
+    }
+    
+    NSString *RGBStr;
+    //获取 R
+    float red = [RGBArr[0] floatValue];
+    RGBStr = [NSString stringWithFormat:@"%f",red];
+    //获取 G
+    float green = [RGBArr[1] floatValue];
+    RGBStr = [NSString stringWithFormat:@"%f",green];
+    //获取 B
+    float blue = [RGBArr[2] floatValue];
+    RGBStr = [NSString stringWithFormat:@"%f",blue];
+    //获取 alpha
+    CGFloat alpha = [RGBArr[3] floatValue];
+    
+    //返回保存RGB值的数组
+    return @[[NSString stringWithFormat:@"%f",red],[NSString stringWithFormat:@"%f",green],[NSString stringWithFormat:@"%f",blue],[NSString stringWithFormat:@"%f",alpha]];
+}
+
 @end
 
 

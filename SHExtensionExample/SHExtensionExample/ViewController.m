@@ -89,7 +89,6 @@
     btn.x = 100;
     btn.size = CGSizeMake(40, 40);
     btn.backgroundColor = [UIColor orangeColor];
-//    [btn addTarget:self action:@selector(btnAction) forControlEvents:UIControlEventTouchUpInside];
     [btn addClickBlock:^(UIButton * _Nonnull btn) {
         NSLog(@"点击了！！！！");
     }];

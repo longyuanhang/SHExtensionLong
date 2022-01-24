@@ -37,6 +37,8 @@ typedef void(^ColorBlock)(NSString *colorString);
 + (UIImage *)getImageWithLayer:(CALayer *)layer;
 //通过颜色数组获取一个渐变的图片
 + (UIImage *)getImageWithSize:(CGSize)size colorArr:(NSArray *)colorArr;
+//根据路径生成图片
++ (UIImage *)getImageWithSize:(CGSize)size path:(CGPathRef)path color:(UIColor *)color;
 
 @end
 

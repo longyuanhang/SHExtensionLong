@@ -47,7 +47,7 @@ static char rightEdgeKey;
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     if (!self.alpha || !self.userInteractionEnabled || self.hidden) {
-        return nil;
+        return [super hitTest:point withEvent:event];
     }
 
     CGRect enlargedRect = [self enlargedRect];
