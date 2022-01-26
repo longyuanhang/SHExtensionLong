@@ -54,5 +54,4 @@ Pod::Spec.new do |s|
     s.subspec 'UIViewController' do |ss|
         ss.source_files = "SHExtension/UIViewController+SHExtension.{h,m}"
     end
-
 end
