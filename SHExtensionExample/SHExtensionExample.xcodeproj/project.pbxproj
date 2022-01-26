@@ -19,6 +19,7 @@
 		5C73D61221537460008D91D8 /* SHExtensionExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C73D61121537460008D91D8 /* SHExtensionExampleTests.m */; };
 		5C73D61D21537460008D91D8 /* SHExtensionExampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C73D61C21537460008D91D8 /* SHExtensionExampleUITests.m */; };
 		5C7E693E216DDE810095939F /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C7E693D216DDE810095939F /* 2.png */; };
+		5C8BE5BC27A0D6A000D6B4CB /* UIViewController+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C8BE5BB27A0D6A000D6B4CB /* UIViewController+SHExtension.m */; };
 		8345737E25E4A85A00F0243F /* SHButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8345736E25E4A85A00F0243F /* SHButton.m */; };
 		8345737F25E4A85A00F0243F /* UIView+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8345737025E4A85A00F0243F /* UIView+SHExtension.m */; };
 		8345738025E4A85A00F0243F /* UIImageView+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8345737125E4A85A00F0243F /* UIImageView+SHExtension.m */; };
@@ -71,6 +72,8 @@
 		5C73D61C21537460008D91D8 /* SHExtensionExampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHExtensionExampleUITests.m; sourceTree = "<group>"; };
 		5C73D61E21537460008D91D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C7E693D216DDE810095939F /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		5C8BE5BA27A0D6A000D6B4CB /* UIViewController+SHExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+SHExtension.h"; sourceTree = "<group>"; };
+		5C8BE5BB27A0D6A000D6B4CB /* UIViewController+SHExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+SHExtension.m"; sourceTree = "<group>"; };
 		8345736E25E4A85A00F0243F /* SHButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SHButton.m; sourceTree = "<group>"; };
 		8345736F25E4A85A00F0243F /* SHTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SHTool.h; sourceTree = "<group>"; };
 		8345737025E4A85A00F0243F /* UIView+SHExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SHExtension.m"; sourceTree = "<group>"; };
@@ -197,6 +200,8 @@
 				8345737B25E4A85A00F0243F /* UIColor+SHExtension.m */,
 				5C31955E278E778A00701F5C /* SHUncaughtExceptionHandler.h */,
 				5C31955F278E778A00701F5C /* SHUncaughtExceptionHandler.m */,
+				5C8BE5BA27A0D6A000D6B4CB /* UIViewController+SHExtension.h */,
+				5C8BE5BB27A0D6A000D6B4CB /* UIViewController+SHExtension.m */,
 			);
 			name = SHExtension;
 			path = ../../SHExtension;
@@ -347,6 +352,7 @@
 				8345738425E4A85A00F0243F /* UIColor+SHExtension.m in Sources */,
 				5C73D60821537460008D91D8 /* main.m in Sources */,
 				5C73D5FA2153745E008D91D8 /* AppDelegate.m in Sources */,
+				5C8BE5BC27A0D6A000D6B4CB /* UIViewController+SHExtension.m in Sources */,
 				8345738325E4A85A00F0243F /* UIButton+SHExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

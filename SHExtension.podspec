@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "SHExtension"
-    s.version      = "1.4.3"
+    s.version      = "1.4.4"
     s.summary      = "常用类别方法，拓展"
     s.license      = "MIT"
     s.authors      = { "CCSH" => "624089195@qq.com" }
@@ -49,6 +49,10 @@ Pod::Spec.new do |s|
 
     s.subspec 'Exception' do |ss|
         ss.source_files = "SHExtension/SHUncaughtExceptionHandler.{h,m}"
+    end
+    
+    s.subspec 'UIViewController' do |ss|
+        ss.source_files = "SHExtension/UIViewController.{h,m}"
     end
 
 end
