@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "SHExtension"
-    s.version      = "1.4.4"
+    s.version      = "1.4.5"
     s.summary      = "常用类别方法，拓展"
     s.license      = "MIT"
     s.authors      = { "CCSH" => "624089195@qq.com" }
@@ -54,4 +54,9 @@ Pod::Spec.new do |s|
     s.subspec 'UIViewController' do |ss|
         ss.source_files = "SHExtension/UIViewController+SHExtension.{h,m}"
     end
+    
+    s.subspec 'UIScrollView' do |ss|
+        ss.source_files = "SHExtension/UIScrollView+SHExtension.{h,m}"
+    end
+    
 end

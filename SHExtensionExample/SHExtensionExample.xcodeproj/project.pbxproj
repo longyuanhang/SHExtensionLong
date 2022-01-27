@@ -10,6 +10,7 @@
 		5C31955B278E68D800701F5C /* NSArray+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C319556278E68D800701F5C /* NSArray+SHExtension.m */; };
 		5C31955C278E68D800701F5C /* NSDictionary+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C319557278E68D800701F5C /* NSDictionary+SHExtension.m */; };
 		5C319560278E778A00701F5C /* SHUncaughtExceptionHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C31955F278E778A00701F5C /* SHUncaughtExceptionHandler.m */; };
+		5C58754727A2720200804B67 /* UIScrollView+SHExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C58754627A2720200804B67 /* UIScrollView+SHExtension.m */; };
 		5C73D5FA2153745E008D91D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C73D5F92153745E008D91D8 /* AppDelegate.m */; };
 		5C73D5FD2153745E008D91D8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C73D5FC2153745E008D91D8 /* ViewController.m */; };
 		5C73D6002153745E008D91D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C73D5FE2153745E008D91D8 /* Main.storyboard */; };
@@ -55,6 +56,8 @@
 		5C31955A278E68D800701F5C /* NSDictionary+SHExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SHExtension.h"; sourceTree = "<group>"; };
 		5C31955E278E778A00701F5C /* SHUncaughtExceptionHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHUncaughtExceptionHandler.h; sourceTree = "<group>"; };
 		5C31955F278E778A00701F5C /* SHUncaughtExceptionHandler.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHUncaughtExceptionHandler.m; sourceTree = "<group>"; };
+		5C58754527A2720200804B67 /* UIScrollView+SHExtension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+SHExtension.h"; sourceTree = "<group>"; };
+		5C58754627A2720200804B67 /* UIScrollView+SHExtension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+SHExtension.m"; sourceTree = "<group>"; };
 		5C73D5F52153745E008D91D8 /* SHExtensionExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SHExtensionExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C73D5F82153745E008D91D8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5C73D5F92153745E008D91D8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 				5C31955F278E778A00701F5C /* SHUncaughtExceptionHandler.m */,
 				5C8BE5BA27A0D6A000D6B4CB /* UIViewController+SHExtension.h */,
 				5C8BE5BB27A0D6A000D6B4CB /* UIViewController+SHExtension.m */,
+				5C58754527A2720200804B67 /* UIScrollView+SHExtension.h */,
+				5C58754627A2720200804B67 /* UIScrollView+SHExtension.m */,
 			);
 			name = SHExtension;
 			path = ../../SHExtension;
@@ -339,6 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C58754727A2720200804B67 /* UIScrollView+SHExtension.m in Sources */,
 				8345737E25E4A85A00F0243F /* SHButton.m in Sources */,
 				8345737F25E4A85A00F0243F /* UIView+SHExtension.m in Sources */,
 				5C73D5FD2153745E008D91D8 /* ViewController.m in Sources */,
