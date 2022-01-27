@@ -10,7 +10,7 @@
 
 @implementation UIScrollView (SHExtension)
 
-//刷新
+//MARK: - 刷新
 - (void)refreshHeaderBlock:(RefreshCallback)block {
     //    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:block];
     //    header.stateLabel.font = kFont(12);
@@ -24,7 +24,7 @@
     //    self.mj_footer = footer;
 }
 
-- (void)refreshStop {
+- (void)stopAllrefresh {
     //    if (self.mj_header.state == MJRefreshStateRefreshing){
     //        [self.mj_header endRefreshing];
     //    }
@@ -33,7 +33,7 @@
     //    }
 }
 
-//注册cell
+//MARK: - 注册cell
 - (void)registerClass:(NSString *)name {
     [self registerClass:name kind:nil];
 }
@@ -79,6 +79,19 @@
             [view registerNib:nib forCellWithReuseIdentifier:name];
         }
     }
+}
+
+//MARK: - 获取cell
+- (UITableViewCell *)dequeueCellWithIdentifier:(NSString *)identifier{
+    if ([self isKindOfClass:[UITableView class]]) {
+        UITableView *view = (UITableView *)self;
+        UITableViewCell *cell = [view dequeueReusableCellWithIdentifier:identifier];
+        if (!cell) {
+            cell = [[NSClassFromString(identifier) init] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        return cell;
+    }
+    return [UITableViewCell new];
 }
 
 @end

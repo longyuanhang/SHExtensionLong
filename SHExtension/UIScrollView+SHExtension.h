@@ -19,13 +19,16 @@ typedef void (^RefreshCallback)(void);
 //添加加载UI
 - (void)refreshFooterBlock:(RefreshCallback)block;
 //停止所有加载的状态
-- (void)refreshStop;
+- (void)stopAllrefresh;
 
 //注册cell
 - (void)registerClass:(NSString *)name;
 - (void)registerClass:(NSString *)name kind:(NSString *_Nullable)kind;
 - (void)registerNib:(NSString *)name;
 - (void)registerNib:(NSString *)name kind:(NSString *_Nullable)kind;
+
+//获取cell
+- (UITableViewCell *)dequeueCellWithIdentifier:(NSString *)identifier;
 
 @end
 
