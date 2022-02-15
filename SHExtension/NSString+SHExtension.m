@@ -9,6 +9,7 @@
 #import "NSString+SHExtension.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <CommonCrypto/CommonCryptor.h>
+#import <UIKit/UIKit.h>
 
 @implementation NSString (SHExtension)
 
@@ -136,6 +137,14 @@
         }
     }];
     return returnValue;
+}
+
+#pragma mark 获取html中的内容
+- (NSString *)htmlContent{
+    NSDictionary *options = @{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType};
+    NSData *data = [self dataUsingEncoding:NSUnicodeStringEncoding];
+    NSAttributedString *att = [[NSAttributedString alloc] initWithData:data options:options documentAttributes:nil error:nil];
+    return att.string;
 }
 
 @end

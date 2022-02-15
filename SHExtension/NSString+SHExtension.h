@@ -33,6 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 //64解码
 @property (nonatomic, copy, readonly) NSString *decoded64;
 
+//获取html中的内容
+@property (nonatomic, copy, readonly) NSString *htmlContent;
+
 @end
 
 NS_ASSUME_NONNULL_END
