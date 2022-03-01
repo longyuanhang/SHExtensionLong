@@ -11,6 +11,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define kSHMinutes (60)
+#define kSHHours (60*kSHMinutes)
+#define kSHDay (24*kSHHours)
+
 static NSString *sh_fomat_1 = @"YYYY-MM-dd HH:mm:ss";
 static NSString *sh_fomat_2 = @"YYYY.MM.dd";
 static NSString *sh_fomat_3 = @"YYYY.MM.dd HH:mm";
@@ -24,50 +28,46 @@ static NSString *sh_fomat_10 = @"HH:mm";
 
 @interface SHTool : NSObject
 
-#pragma mark - 当前时间处理
+#pragma mark - 时间戳
 #pragma mark 获取当前时间戳
 + (NSString *)getTimeMs;
-
-#pragma mark 获取当前格式时间
-+ (NSString *)getTimeWithformat:(NSString *)format;
-+ (NSString *)getTimeWithformat:(NSString *)format GMT:(NSInteger)GMT;
-
-#pragma mark 获取当前时区
-+ (NSInteger)getCurrentGMT;
-
-#pragma mark - 时间格式化
-#pragma mark 获取指定格式时间
-+ (NSString *)getTimeWithTime:(NSString *)time currentFormat:(NSString *)currentFormat format:(NSString *)format;
-
-#pragma mark - 时间处理
-#pragma mark 获取时间戳
+#pragma mark 时间戳转换
 + (NSString *)getMsWithTime:(NSString *)time format:(NSString *)format;
 + (NSString *)getMsWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT;
 + (NSString *)getMsWithDate:(NSDate *)date;
 
-#pragma mark 获取time
+#pragma mark - 格式time
+#pragma mark 获取当前格式time
++ (NSString *)getTimeWithformat:(NSString *)format;
++ (NSString *)getTimeWithformat:(NSString *)format GMT:(NSInteger)GMT;
+#pragma mark 转换time
 + (NSString *)getTimeWithMs:(NSString *)ms format:(NSString *)format;
 + (NSString *)getTimeWithMs:(NSString *)ms format:(NSString *)format GMT:(NSInteger)GMT;
 + (NSString *)getTimeWithDate:(NSDate *)date format:(NSString *)format;
 + (NSString *)getTimeWithDate:(NSDate *)date format:(NSString *)format GMT:(NSInteger)GMT;
+#pragma mark 获取指定格式time
++ (NSString *)getTimeWithTime:(NSString *)time currentFormat:(NSString *)currentFormat format:(NSString *)format;
 
-#pragma mark 获取date
+#pragma mark - date
+#pragma mark 转换date
 + (NSDate *)getDateWithMs:(NSString *)ms;
 + (NSDate *)getDateWithTime:(NSString *)time format:(NSString *)format;
 + (NSDate *)getDateWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT;
 
-
-#pragma mark 获取即时时间
+#pragma mark - 获取即时时间
 + (NSString *)getInstantTimeWithMs:(NSString *)ms;
 + (NSString *)getInstantTimeWithDate:(NSDate *)date;
 + (NSString *)getInstantTimeWithTime:(NSString *)time format:(NSString *)format;
 + (NSString *)getInstantTimeWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT;
 
 #pragma mark - 时间其他方法
+#pragma mark 当前时区
++ (NSInteger)getCurrentGMT;
+
 #pragma mark 比较两个日期大小
 + (NSInteger)compareStartDate:(NSString *)startDate endDate:(NSString *)endDate;
 
-#pragma mark 处理时间戳
+#pragma mark 处理时间戳(13位毫秒)
 + (NSString *)handleMs:(NSString *)str;
 
 #pragma mark - 计算方法
@@ -121,17 +121,23 @@ static NSString *sh_fomat_10 = @"HH:mm";
 #pragma mark 获取最上方控制器
 + (UIViewController *)getCurrentVC;
 
+#pragma mark 获取window
++ (UIWindow *)getWindow;
+
 #pragma mark 获取url的参数
 + (NSDictionary *)getUrlParam:(NSString *)str;
 
 #pragma mark 获取推送Token
 + (NSString *)getDeviceToken:(NSData *)deviceToken;
 
-#pragma mark 底部安全高度
+#pragma mark 底部安全H
 + (CGFloat)getSafeBottomH;
 
-#pragma mark 顶部安全高度
+#pragma mark 顶部安全H
 + (CGFloat)getSafeTopH;
+
+#pragma mark 状态栏H
++ (CGFloat)getStatusBarFrameH;
 
 #pragma mark app名字
 + (NSString *)appName;

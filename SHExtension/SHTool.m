@@ -12,47 +12,20 @@
 
 @implementation SHTool
 
-#pragma mark - 当前时间处理
+#pragma mark - 时间戳
 #pragma mark 获取当前时间戳
-+ (NSString *)getTimeMs{
++ (NSString *)getTimeMs {
     NSDate *date = [NSDate date];
     UInt64 recordTime = [date timeIntervalSince1970] * 1000;
     return [NSString stringWithFormat:@"%llu", recordTime];
 }
 
-#pragma mark 获取当前格式时间
-+ (NSString *)getTimeWithformat:(NSString *)format{
-    return [self getTimeWithformat:format GMT:-1];
-}
-
-+ (NSString *)getTimeWithformat:(NSString *)format GMT:(NSInteger)GMT{
-    return [self getTimeWithDate:[NSDate date] format:format GMT:GMT];
-}
-
-#pragma mark 获取当前时区
-+ (NSInteger)getCurrentGMT{
-    return [[NSTimeZone localTimeZone] secondsFromGMT];
-}
-
-#pragma mark - 时间格式化
-#pragma mark 获取指定格式时间
-+ (NSString *)getTimeWithTime:(NSString *)time currentFormat:(NSString *)currentFormat format:(NSString *)format{
-    if (!time.length) {
-        return @"";
-    }
-    
-    NSDate *date = [self getDateWithTime:time format:currentFormat];
-    
-    return [self getTimeWithDate:date format:format];
-}
-
-#pragma mark - 时间处理
-#pragma mark 获取时间戳
-+ (NSString *)getMsWithTime:(NSString *)time format:(NSString *)format{
+#pragma mark 时间戳转换
++ (NSString *)getMsWithTime:(NSString *)time format:(NSString *)format {
     return [self getMsWithTime:time format:format GMT:-1];
 }
 
-+ (NSString *)getMsWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT{
++ (NSString *)getMsWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT {
     if (!time.length) {
         return @"";
     }
@@ -62,19 +35,28 @@
     return [self getMsWithDate:date];
 }
 
-+ (NSString *)getMsWithDate:(NSDate *)date{
-    
++ (NSString *)getMsWithDate:(NSDate *)date {
     UInt64 recordTime = [date timeIntervalSince1970] * 1000;
     
     return [NSString stringWithFormat:@"%llu", recordTime];
 }
 
-#pragma mark 获取time
-+ (NSString *)getTimeWithMs:(NSString *)ms format:(NSString *)format{
+#pragma mark - 格式time
+#pragma mark 获取当前格式time
++ (NSString *)getTimeWithformat:(NSString *)format {
+    return [self getTimeWithformat:format GMT:-1];
+}
+
++ (NSString *)getTimeWithformat:(NSString *)format GMT:(NSInteger)GMT {
+    return [self getTimeWithDate:[NSDate date] format:format GMT:GMT];
+}
+
+#pragma mark 转换time
++ (NSString *)getTimeWithMs:(NSString *)ms format:(NSString *)format {
     return [self getTimeWithMs:ms format:format GMT:-1];
 }
 
-+ (NSString *)getTimeWithMs:(NSString *)ms format:(NSString *)format GMT:(NSInteger)GMT{
++ (NSString *)getTimeWithMs:(NSString *)ms format:(NSString *)format GMT:(NSInteger)GMT {
     ms = [self handleMs:ms];
     if (!ms.length) {
         return @"";
@@ -85,12 +67,11 @@
     return [self getTimeWithDate:date format:format GMT:GMT];
 }
 
-+ (NSString *)getTimeWithDate:(NSDate *)date format:(NSString *)format{
-    
++ (NSString *)getTimeWithDate:(NSDate *)date format:(NSString *)format {
     return [self getTimeWithDate:date format:format GMT:-1];
 }
 
-+ (NSString *)getTimeWithDate:(NSDate *)date format:(NSString *)format GMT:(NSInteger)GMT{
++ (NSString *)getTimeWithDate:(NSDate *)date format:(NSString *)format GMT:(NSInteger)GMT {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:format];
     if (GMT != -1) {
@@ -100,20 +81,32 @@
     return [formatter stringFromDate:date];
 }
 
-#pragma mark 获取date
-+ (NSDate *)getDateWithMs:(NSString *)ms{
+#pragma mark 获取指定格式time
++ (NSString *)getTimeWithTime:(NSString *)time currentFormat:(NSString *)currentFormat format:(NSString *)format {
+    if (!time.length) {
+        return @"";
+    }
+    
+    NSDate *date = [self getDateWithTime:time format:currentFormat];
+    
+    return [self getTimeWithDate:date format:format];
+}
+
+#pragma mark - date
+#pragma mark 转换date
++ (NSDate *)getDateWithMs:(NSString *)ms {
     ms = [self handleMs:ms];
     if (!ms.length) {
         return nil;
     }
-    return [NSDate dateWithTimeIntervalSince1970:[ms longLongValue]/1000];
+    return [NSDate dateWithTimeIntervalSince1970:[ms longLongValue] / 1000];
 }
 
-+ (NSDate *)getDateWithTime:(NSString *)time format:(NSString *)format{
++ (NSDate *)getDateWithTime:(NSString *)time format:(NSString *)format {
     return [self getDateWithTime:time format:format GMT:-1];
 }
 
-+ (NSDate *)getDateWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT{
++ (NSDate *)getDateWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT {
     if (!time.length) {
         return nil;
     }
@@ -127,8 +120,8 @@
     return [formatter dateFromString:time];
 }
 
-#pragma mark 获取即时时间
-+ (NSString *)getInstantTimeWithMs:(NSString *)ms{
+#pragma mark - 获取即时时间
++ (NSString *)getInstantTimeWithMs:(NSString *)ms {
     ms = [self handleMs:ms];
     if (!ms.length) {
         return @"";
@@ -139,7 +132,7 @@
     return [self getInstantTimeWithDate:date];
 }
 
-+ (NSString *)getInstantTimeWithDate:(NSDate *)date{
++ (NSString *)getInstantTimeWithDate:(NSDate *)date {
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
     
     //当前
@@ -159,43 +152,44 @@
         //获取当前时时间戳差
         NSTimeInterval time = [[NSDate date] timeIntervalSinceDate:date];
         
-        if (time < 60) { //1分钟内
-            
+        if (time < kSHMinutes) { // 1分钟内
             return @"刚刚";
-        } else if (time < 60 * 60) { //1小时内
-            
-            return [NSString stringWithFormat:@"%.0f分钟前", time / 60];
-        } else if (time < 60 * 60 * 24) { //1天内
-            
-            return [NSString stringWithFormat:@"%.0f小时前", time / 60 / 60];
+        } else if (time < kSHHours) { // 1小时内
+            return [NSString stringWithFormat:@"%.0f分钟前", time / kSHMinutes];
+        } else if (time < kSHDay) { // 1天内
+            return [NSString stringWithFormat:@"%.0f小时前", time / kSHHours];
         }
     } else if (currentComponents.year == yesterdayComponents.year && currentComponents.month == yesterdayComponents.month && currentComponents.day == yesterdayComponents.day) { //昨天
-        
+        //时分
         format.dateFormat = sh_fomat_10;
         return [NSString stringWithFormat:@"昨天 %@", [format stringFromDate:date]];
     } else if (currentComponents.year == todayComponents.year) { //今年
-        
+        //月日
         format.dateFormat = sh_fomat_9;
         return [format stringFromDate:date];
     }
-    
-    //其他
-    format.dateFormat = sh_fomat_4;
+    //年月日 时分
+    format.dateFormat = sh_fomat_5;
     return [format stringFromDate:date];
 }
 
-+ (NSString *)getInstantTimeWithTime:(NSString *)time format:(NSString *)format{
++ (NSString *)getInstantTimeWithTime:(NSString *)time format:(NSString *)format {
     return [self getInstantTimeWithTime:time format:format GMT:-1];
 }
 
-+ (NSString *)getInstantTimeWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT{
++ (NSString *)getInstantTimeWithTime:(NSString *)time format:(NSString *)format GMT:(NSInteger)GMT {
     NSDate *date = [self getDateWithTime:time format:format GMT:GMT];
     return [self getInstantTimeWithDate:date];
 }
 
 #pragma mark - 时间其他方法
+#pragma mark 当前时区
++ (NSInteger)getCurrentGMT {
+    return [[NSTimeZone localTimeZone] secondsFromGMT];
+}
+
 #pragma mark 比较两个日期大小
-+ (NSInteger)compareStartDate:(NSString *)startDate endDate:(NSString *)endDate{
++ (NSInteger)compareStartDate:(NSString *)startDate endDate:(NSString *)endDate {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:sh_fomat_1];
     NSDate *date1 = [[NSDate alloc] init];
@@ -204,13 +198,13 @@
     date2 = [formatter dateFromString:endDate];
     NSComparisonResult result = [date1 compare:date2];
     switch (result) {
-        case NSOrderedAscending: //date1 < date2
+        case NSOrderedAscending: // date1 < date2
             return -1;
             break;
-        case NSOrderedSame: //date1 == date2
+        case NSOrderedSame: // date1 == date2
             return 0;
             break;
-        case NSOrderedDescending: //date1 > date2
+        case NSOrderedDescending: // date1 > date2
             return 1;
             break;
         default:
@@ -219,8 +213,8 @@
     return 0;
 }
 
-#pragma mark 处理时间戳
-+ (NSString *)handleMs:(NSString *)str{
+#pragma mark 处理时间戳(13位毫秒)
++ (NSString *)handleMs:(NSString *)str {
     if (str.length == 10) {
         return [NSString stringWithFormat:@"%@000", str];
     }
@@ -229,7 +223,6 @@
     }
     return str;
 }
-
 
 #pragma mark - 计算方法
 #pragma mark 计算富文本的size
@@ -291,16 +284,15 @@
     } else if (num >= 10000) {
         return [NSString stringWithFormat:@"%.1fW", [count doubleValue] / 10000];
     }
-    return [NSString stringWithFormat:@"%ld",num];
+    return [NSString stringWithFormat:@"%ld", num];
 }
 
 #pragma mark 处理金额
 + (NSString *)handleMoneyWithStr:(NSString *)str {
-
     NSNumber *number = @(str.floatValue);
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     formatter.positivePrefix = @"";
-    formatter.numberStyle = kCFNumberFormatterCurrencyStyle;
+    formatter.numberStyle = NSNumberFormatterCurrencyStyle;
     
     return [formatter stringFromNumber:number];
 }
@@ -318,7 +310,7 @@
     formatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
     formatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
     
-    if (interval / (60 * 60) >= 1) {
+    if (interval / kSHHours >= 1) {
         //超过一小时
         formatter.allowedUnits = kCFCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
     } else {
@@ -457,38 +449,42 @@
 
 #pragma mark 获取最上方控制器
 + (UIViewController *)getCurrentVC {
+    UIWindow *window = [self getWindow];
+    UIViewController *rootVC = window.rootViewController;
+    UIViewController *activeVC = nil;
+    
+    if ([rootVC isKindOfClass:[UINavigationController class]]) {
+        activeVC = [(UINavigationController *)rootVC visibleViewController];
+    } else if ([rootVC isKindOfClass:[UITabBarController class]]) {
+        activeVC = [(UITabBarController *)rootVC selectedViewController];
+    } else if (rootVC.presentedViewController) {
+        activeVC = rootVC.presentedViewController;
+    } else if (rootVC.childViewControllers.count > 0) {
+        activeVC = [rootVC.childViewControllers lastObject];
+    } else{
+        activeVC = rootVC;
+    }
+    
+    return activeVC;
+}
+
+#pragma mark 获取window
++ (UIWindow *)getWindow {
     UIWindow *window = [UIApplication sharedApplication].delegate.window;
     if (window.windowLevel != UIWindowLevelNormal) {
         NSArray *windows = [[UIApplication sharedApplication] windows];
-        for (UIWindow *tmpWin in windows) {
-            if (tmpWin.windowLevel == UIWindowLevelNormal) {
-                window = tmpWin;
+        for (UIWindow *obj in windows) {
+            if (obj.windowLevel == UIWindowLevelNormal) {
+                window = obj;
                 break;
             }
         }
     }
-    UIViewController *rootVC = window.rootViewController;
-    UIViewController *activeVC = nil;
-    
-    while (true) {
-        if ([rootVC isKindOfClass:[UINavigationController class]]) {
-            activeVC = [(UINavigationController *)rootVC visibleViewController];
-        } else if ([rootVC isKindOfClass:[UITabBarController class]]) {
-            activeVC = [(UITabBarController *)rootVC selectedViewController];
-        } else if (rootVC.presentedViewController) {
-            activeVC = rootVC.presentedViewController;
-        } else if (rootVC.childViewControllers.count > 0) {
-            activeVC = [rootVC.childViewControllers lastObject];
-        } else {
-            break;
-        }
-        rootVC = activeVC;
-    }
-    return activeVC;
+    return window;
 }
 
 #pragma mark 获取url的参数
-+ (NSDictionary *)getUrlParam:(NSString *)str{
++ (NSDictionary *)getUrlParam:(NSString *)str {
     //获取参数
     NSMutableDictionary *param = [NSMutableDictionary new];
     NSArray *query = [str componentsSeparatedByString:@"&"];
@@ -499,34 +495,45 @@
     return param;
 }
 
-#pragma mark 底部安全高度
-+ (CGFloat)getSafeBottomH{
+#pragma mark 底部安全H
++ (CGFloat)getSafeBottomH {
     if (@available(iOS 11.0, *)) {
         return [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom;
     }
     return 0;
 }
 
-#pragma mark 顶部安全高度
-+ (CGFloat)getSafeTopH{
+#pragma mark 顶部安全H
++ (CGFloat)getSafeTopH {
     if (@available(iOS 11.0, *)) {
         return [UIApplication sharedApplication].keyWindow.safeAreaInsets.top;
     }
     return CGRectGetHeight([UIApplication sharedApplication].statusBarFrame);
 }
 
+#pragma mark 状态栏H
++ (CGFloat)getStatusBarFrameH {
+    CGRect frame;
+    if (@available(iOS 13.0, *)) {
+        frame = [UIApplication sharedApplication].windows.firstObject.windowScene.statusBarManager.statusBarFrame;
+    }else{
+        frame = [UIApplication sharedApplication].statusBarFrame;
+    }
+    return CGRectGetHeight(frame);
+}
+
 #pragma mark app名字
-+ (NSString *)appName{
++ (NSString *)appName {
     NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
     return [infoDictionary objectForKey:@"CFBundleName"];
 }
 
 #pragma mark 拨打电话
-+ (void)callPhone:(NSString *)phone{
++ (void)callPhone:(NSString *)phone {
     if (!phone.length) {
         return;
     }
-    NSString *str = [NSString stringWithFormat:@"telprompt://%@",phone];
+    NSString *str = [NSString stringWithFormat:@"telprompt://%@", phone];
     if (@available(iOS 10.0, *)) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str] options:@{} completionHandler:nil];
     } else {
@@ -536,7 +543,6 @@
 
 #pragma mark 获取文件夹（没有的话创建）
 + (NSString *)getCreateFilePath:(NSString *)path {
-    
     if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
         [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
     }
@@ -544,43 +550,43 @@
 }
 
 #pragma mark 获取推送Token
-+ (NSString *)getDeviceToken:(NSData *)deviceToken{
++ (NSString *)getDeviceToken:(NSData *)deviceToken {
     NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     
     if (@available(iOS 13, *)) {
-        if (![deviceToken isKindOfClass:[NSData class]])
-        {
+        if (![deviceToken isKindOfClass:[NSData class]]) {
             return token;
         }
         const unsigned *tokenBytes = [deviceToken bytes];
         token = [NSString stringWithFormat:@"%08x%08x%08x%08x%08x%08x%08x%08x",
-                 ntohl(tokenBytes[0]), ntohl(tokenBytes[1]), ntohl(tokenBytes[2]),
-                 ntohl(tokenBytes[3]), ntohl(tokenBytes[4]), ntohl(tokenBytes[5]),
-                 ntohl(tokenBytes[6]), ntohl(tokenBytes[7])];
+                 ntohl(tokenBytes[0]),
+                 ntohl(tokenBytes[1]),
+                 ntohl(tokenBytes[2]),
+                 ntohl(tokenBytes[3]),
+                 ntohl(tokenBytes[4]),
+                 ntohl(tokenBytes[5]),
+                 ntohl(tokenBytes[6]),
+                 ntohl(tokenBytes[7])];
     }
     return token;
 }
 
-
 #pragma mark - 权限获取
 #pragma mark 麦克风权限
-+ (void)requestMicrophoneaPemissionsWithResult:(void(^)( BOOL granted))completion{
++ (void)requestMicrophoneaPemissionsWithResult:(void (^)(BOOL granted))completion {
     if ([AVCaptureDevice respondsToSelector:@selector(authorizationStatusForMediaType:)]) {
         AVAuthorizationStatus permission =
         [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];
         
         switch (permission) {
-            case AVAuthorizationStatusAuthorized:
-            {
+            case AVAuthorizationStatusAuthorized: {
                 //已授权
                 if (completion) {
                     completion(YES);
                 }
-            }
-                break;
-            case AVAuthorizationStatusNotDetermined:
-            {
+            } break;
+            case AVAuthorizationStatusNotDetermined: {
                 //未授权
                 [AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio
                                          completionHandler:^(BOOL granted) {
@@ -591,25 +597,20 @@
                     });
                 }];
             } break;
-            case AVAuthorizationStatusDenied:
-            {
+            case AVAuthorizationStatusDenied: {
                 //用户拒绝
             }
-            case AVAuthorizationStatusRestricted:
-            {
+            case AVAuthorizationStatusRestricted: {
                 //不支持此设备
                 if (completion) {
                     completion(NO);
                 }
-            }
-                break;
-            default:
-            {
+            } break;
+            default: {
                 if (completion) {
                     completion(NO);
                 }
-            }
-                break;
+            } break;
         }
     }
 }
@@ -621,16 +622,13 @@
         [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
         
         switch (permission) {
-            case AVAuthorizationStatusAuthorized:
-            {
+            case AVAuthorizationStatusAuthorized: {
                 //已授权
                 if (completion) {
                     completion(YES);
                 }
-            }
-                break;
-            case AVAuthorizationStatusNotDetermined:
-            {
+            } break;
+            case AVAuthorizationStatusNotDetermined: {
                 //未授权
                 [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
                                          completionHandler:^(BOOL granted) {
@@ -641,25 +639,20 @@
                     });
                 }];
             } break;
-            case AVAuthorizationStatusDenied:
-            {
+            case AVAuthorizationStatusDenied: {
                 //用户拒绝
             }
-            case AVAuthorizationStatusRestricted:
-            {
+            case AVAuthorizationStatusRestricted: {
                 //不支持此设备
                 if (completion) {
                     completion(NO);
                 }
-            }
-                break;
-            default:
-            {
+            } break;
+            default: {
                 if (completion) {
                     completion(NO);
                 }
-            }
-                break;
+            } break;
         }
     }
 }
