@@ -272,8 +272,8 @@
     return [UIImage getImageWithLayer:gradientLayer];
 }
 
-#pragma mark 根据路径生成图片
-+ (UIImage *)getImageWithSize:(CGSize)size path:(CGPathRef)path color:(UIColor *)color{
+#pragma mark 根据Path生成图片
++ (UIImage *)getImageWithPath:(CGPathRef)path size:(CGSize)size color:(UIColor *)color;{
     UIImage *image = nil;
 
     CGColorSpaceRef rgb = CGColorSpaceCreateDeviceRGB();

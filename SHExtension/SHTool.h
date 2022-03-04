@@ -148,6 +148,9 @@ static NSString *sh_fomat_10 = @"HH:mm";
 #pragma mark 更换图标
 + (void)changeIcon:(NSString *)icon;
 
+#pragma mark 坐标生成路径
++ (CGPathRef)pathFromPoints:(NSArray *)points;
+
 #pragma mark - 权限获取
 #pragma mark 麦克风权限
 + (void)requestMicrophoneaPemissionsWithResult:(void(^)( BOOL granted))completion;

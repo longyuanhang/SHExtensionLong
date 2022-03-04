@@ -19,7 +19,6 @@ typedef void(^ColorBlock)(NSString *colorString);
 //图片置灰
 @property (nonatomic, assign, readonly) UIImage *imageGray;
 
-
 //获取指定大小的图片(图片等比例居中)
 - (UIImage *)imageWithSize:(CGSize)size;
 //设置图片颜色(整体)
@@ -37,17 +36,13 @@ typedef void(^ColorBlock)(NSString *colorString);
 + (UIImage *)getImageWithLayer:(CALayer *)layer;
 //通过颜色数组获取一个渐变的图片
 + (UIImage *)getImageWithSize:(CGSize)size colorArr:(NSArray *)colorArr;
-//根据路径生成图片
-+ (UIImage *)getImageWithSize:(CGSize)size path:(CGPathRef)path color:(UIColor *)color;
+//根据Path生成图片
++ (UIImage *)getImageWithPath:(CGPathRef)path size:(CGSize)size color:(UIColor *)color;
 
 @end
 
 
-
-
-
 #pragma mark - 获取图片颜色类
-
 static const NSInteger kMaxColorNum = 16;
 
 @interface Palette : NSObject
@@ -71,19 +66,16 @@ static const NSInteger kMaxColorNum = 16;
 
 - (UIColor*)getColor;
 
-//eg:"#FF3000"
 - (NSString*)getColorString;
 
 - (NSArray*)getHsl;
 
 - (NSInteger)getPopulation;
 
-
 @end
 
 @class VBox;
 
-//A queue like PriorityQueue in Java
 
 @interface PriorityBoxArray : NSObject
 
@@ -91,7 +83,6 @@ static const NSInteger kMaxColorNum = 16;
 
 - (VBox*)objectAtIndex:(NSInteger)i;
 
-//Get the header element and delete it
 - (VBox*)poll;
 
 - (NSUInteger)count;

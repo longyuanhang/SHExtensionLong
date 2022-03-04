@@ -568,6 +568,31 @@
     }
 }
 
+#pragma mark 坐标生成路径
++ (CGPathRef)pathFromPoints:(NSArray *)points {
+    if (points != nil) {
+    
+        CGMutablePathRef path = CGPathCreateMutable();
+        
+        [points enumerateObjectsUsingBlock:^(NSString *_Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSArray *arrXY = [obj componentsSeparatedByString:@","];
+            if (arrXY.count >= 2) {
+                CGFloat pointX = [arrXY[0] floatValue];
+                CGFloat pointY = [arrXY[1] floatValue];
+                if (idx == 0) {
+                    CGPathMoveToPoint(path, NULL, pointX, pointY);
+                } else {
+                    CGPathAddLineToPoint(path, NULL, pointX, pointY);
+                }
+            }
+        }];
+        CGPathCloseSubpath(path);
+        return path;
+    }
+    
+    return nil;
+}
+
 #pragma mark - 权限获取
 #pragma mark 麦克风权限
 + (void)requestMicrophoneaPemissionsWithResult:(void (^)(BOOL granted))completion {
