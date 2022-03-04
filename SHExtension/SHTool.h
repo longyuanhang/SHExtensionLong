@@ -64,9 +64,6 @@ static NSString *sh_fomat_10 = @"HH:mm";
 #pragma mark 当前时区
 + (NSInteger)getCurrentGMT;
 
-#pragma mark 比较两个日期大小
-+ (NSInteger)compareStartDate:(NSString *)startDate endDate:(NSString *)endDate;
-
 #pragma mark 处理时间戳(13位毫秒)
 + (NSString *)handleMs:(NSString *)str;
 
@@ -147,6 +144,9 @@ static NSString *sh_fomat_10 = @"HH:mm";
 
 #pragma mark 获取文件夹（没有的话创建）
 + (NSString *)getCreateFilePath:(NSString *)path;
+
+#pragma mark 更换图标
++ (void)changeIcon:(NSString *)icon;
 
 #pragma mark - 权限获取
 #pragma mark 麦克风权限

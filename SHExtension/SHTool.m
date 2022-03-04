@@ -188,31 +188,6 @@
     return [[NSTimeZone localTimeZone] secondsFromGMT];
 }
 
-#pragma mark 比较两个日期大小
-+ (NSInteger)compareStartDate:(NSString *)startDate endDate:(NSString *)endDate {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:sh_fomat_1];
-    NSDate *date1 = [[NSDate alloc] init];
-    NSDate *date2 = [[NSDate alloc] init];
-    date1 = [formatter dateFromString:startDate];
-    date2 = [formatter dateFromString:endDate];
-    NSComparisonResult result = [date1 compare:date2];
-    switch (result) {
-        case NSOrderedAscending: // date1 < date2
-            return -1;
-            break;
-        case NSOrderedSame: // date1 == date2
-            return 0;
-            break;
-        case NSOrderedDescending: // date1 > date2
-            return 1;
-            break;
-        default:
-            break;
-    }
-    return 0;
-}
-
 #pragma mark 处理时间戳(13位毫秒)
 + (NSString *)handleMs:(NSString *)str {
     if (str.length == 10) {
@@ -570,6 +545,27 @@
                  ntohl(tokenBytes[7])];
     }
     return token;
+}
+
+#pragma mark 更换图标
++ (void)changeIcon:(NSString *)icon{
+    
+    if (@available(iOS 10.3, *)) {
+        if (![[UIApplication sharedApplication] supportsAlternateIcons]) {
+            return;
+        }
+    } else {
+        // Fallback on earlier versions
+    }
+    if (@available(iOS 10.3, *)) {
+        [[UIApplication sharedApplication] setAlternateIconName:icon completionHandler:^(NSError * _Nullable error) {
+            if (error) {
+                NSLog(@"更换app图标发生错误了： %@",error);
+            }
+        }];
+    } else {
+        // Fallback on earlier versions
+    }
 }
 
 #pragma mark - 权限获取
