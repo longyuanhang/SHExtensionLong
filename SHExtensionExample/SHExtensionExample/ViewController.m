@@ -44,7 +44,7 @@
     NSString *str = [SHTool getInstantTimeWithMs:@"1610672356291"];
     NSLog(@"===%@",str);
     
-    str = [SHTool handleVideoTime:@"1234"];
+    str = [SHTool handleTime:@"00:99:01" format: NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond];
     NSLog(@"===%@",str);
     
     UIView *view = [[UIView alloc]init];
@@ -93,7 +93,6 @@
         NSLog(@"点击了！！！！");
     }];
     [self.view addSubview:btn];
-
 }
 
 - (void)btnAction{

@@ -278,28 +278,47 @@
 }
 
 #pragma mark 处理视频时间
-+ (NSString *)handleVideoTime:(NSString *)time {
-    NSTimeInterval interval = time.integerValue;
++ (NSString *)handleTime:(NSString *)str format:(NSCalendarUnit)format{
     
+    __block NSTimeInterval interval = str.integerValue;
+
+    if ([str containsString:@":"]) {
+        interval = 0;
+        NSArray *arr = [str componentsSeparatedByString:@":"];
+        [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            switch (idx) {
+                case 3:
+                {
+                    interval += [obj intValue] *24;
+                }
+                    break;
+                default:
+                {
+                    interval += [obj intValue] *60;
+                }
+                    break;
+            }
+        }];
+    }
+
     NSDateComponentsFormatter *formatter = [[NSDateComponentsFormatter alloc] init];
     formatter.unitsStyle = NSDateComponentsFormatterUnitsStylePositional;
     formatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
-    
-    if (interval / kSHHours >= 1) {
-        //超过一小时
-        formatter.allowedUnits = kCFCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
-    } else {
-        formatter.allowedUnits = NSCalendarUnitMinute | NSCalendarUnitSecond;
-    }
+    formatter.allowedUnits = format;
     
     NSString *dealTime = [formatter stringFromTimeInterval:interval];
     
-    if (dealTime.length == 7 || dealTime.length == 4) {
+    if (dealTime.length%3 == 1) {
         //补0
         dealTime = [NSString stringWithFormat:@"0%@", dealTime];
     }
     
     return dealTime;
+}
+
+#pragma mark 处理视频时间(默认：分秒)
++ (NSString *)handleTime:(NSString *)str{
+    return [self handleTime:str format:NSCalendarUnitMinute | NSCalendarUnitSecond];
 }
 
 #pragma mark 获取一个渐变色的视图

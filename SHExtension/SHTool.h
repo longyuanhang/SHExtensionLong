@@ -96,8 +96,10 @@ static NSString *sh_fomat_10 = @"HH:mm";
 #pragma mark 处理价格(小数点后两位)
 + (NSString *)handlePriceWithStr:(NSString *)str;
 
-#pragma mark 处理视频时间
-+ (NSString *)handleVideoTime:(NSString *)str;
+#pragma mark 处理时间
++ (NSString *)handleTime:(NSString *)str format:(NSCalendarUnit)format;
+#pragma mark 处理视频时间(默认：分秒)
++ (NSString *)handleTime:(NSString *)str;
 
 #pragma mark 获取一个渐变色的视图
 + (UIView *)getGradientViewWithSize:(CGSize)size colorArr:(NSArray *)colorArr;
