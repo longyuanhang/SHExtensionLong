@@ -93,6 +93,10 @@
         NSLog(@"点击了！！！！");
     }];
     [self.view addSubview:btn];
+    
+    NSString *aes = [@"12345" AES128EncryptWithKey:@"0000000000000000"];
+    aes = [aes AES128DecryptWithKey:@"0000000000000000"];
+    NSLog(@"aes-cbc===%@",aes);
 }
 
 - (void)btnAction{

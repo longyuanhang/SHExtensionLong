@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "SHExtension"
-    s.version      = "1.4.9"
+    s.version      = "1.4.10"
     s.summary      = "常用类别方法，拓展"
     s.license      = "MIT"
     s.authors      = { "CCSH" => "624089195@qq.com" }
@@ -9,10 +9,12 @@ Pod::Spec.new do |s|
     s.homepage     = "https://github.com/CCSH/SHExtension"
     s.source       = { :git => "https://github.com/CCSH/SHExtension.git", :tag => s.version }
     s.source_files = "SHExtension/*.{h,m}"
+    s.dependency "GTMBase64"
 
     #部分功能
     s.subspec 'NSString' do |ss|
         ss.source_files = "SHExtension/NSString+SHExtension.{h,m}"
+        ss.dependency "GTMBase64"
     end
 
     s.subspec 'UIButton' do |ss|

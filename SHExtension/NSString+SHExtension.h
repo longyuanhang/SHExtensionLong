@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, readonly) NSString *fileName;
 //获取字符串长度(中文：2 其他：1）
 @property (nonatomic, assign, readonly) NSInteger textLength;
+//获取html中的内容
+@property (nonatomic, copy, readonly) NSString *htmlContent;
+
 
 //是否为邮箱
 @property (nonatomic, assign, readonly) BOOL isEmail;
@@ -28,13 +31,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 //获取MD5加密
 @property (nonatomic, copy, readonly) NSString *md5;
+
 //64编码
 @property (nonatomic, copy, readonly) NSString *base64;
 //64解码
 @property (nonatomic, copy, readonly) NSString *decoded64;
 
-//获取html中的内容
-@property (nonatomic, copy, readonly) NSString *htmlContent;
+#pragma mark - AES-CBC
+#pragma mark AES128-CBC-NoPadding 加密
+- (NSString *)AES128EncryptWithKey:(NSString *)key iv:(NSString *)iv;
+#pragma mark AES128-CBC-NoPadding 解密
+- (NSString *)AES128DecryptWithKey:(NSString *)key iv:(NSString *)iv;
+
+#pragma mark - AES-ECB
+#pragma mark AES128-ECB-NoPadding 加密
+- (NSString *)AES128EncryptWithKey:(NSString *)key;
+#pragma mark AES128-ECB-NoPadding 解密
+- (NSString *)AES128DecryptWithKey:(NSString *)key;
 
 @end
 
