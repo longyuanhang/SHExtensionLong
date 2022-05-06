@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "SHExtension"
-    s.version      = "1.4.10"
+    s.version      = "1.4.11"
     s.summary      = "常用类别方法，拓展"
     s.license      = "MIT"
     s.authors      = { "CCSH" => "624089195@qq.com" }

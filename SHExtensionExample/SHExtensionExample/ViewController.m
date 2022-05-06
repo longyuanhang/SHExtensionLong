@@ -44,7 +44,7 @@
     NSString *str = [SHTool getInstantTimeWithMs:@"1610672356291"];
     NSLog(@"===%@",str);
     
-    str = [SHTool handleTime:@"00:99:01" format: NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond];
+    str = [SHTool handleTime:@"01:01:01" format: NSCalendarUnitMinute | NSCalendarUnitSecond];
     NSLog(@"===%@",str);
     
     UIView *view = [[UIView alloc]init];

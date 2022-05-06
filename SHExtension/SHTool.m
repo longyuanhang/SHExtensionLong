@@ -284,18 +284,30 @@
 
     if ([str containsString:@":"]) {
         interval = 0;
+        
         NSArray *arr = [str componentsSeparatedByString:@":"];
+        arr = [[arr reverseObjectEnumerator] allObjects];
         [arr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             switch (idx) {
-                case 3:
+                case 0:
                 {
-                    interval += [obj intValue] *24;
+                    //秒
+                    interval += [obj intValue];
+                }
+                    break;
+                case 1:
+                {
+                    //分
+                    interval += [obj intValue]*60;
+                }
+                    break;
+                case 2:
+                {
+                    //时
+                    interval += [obj intValue]*60*60;
                 }
                     break;
                 default:
-                {
-                    interval += [obj intValue] *60;
-                }
                     break;
             }
         }];
