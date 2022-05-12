@@ -247,7 +247,17 @@ static UIPanGestureRecognizer *_panGesture;
 #pragma mark 虚线边框
 - (void)drawDashedBorder:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth cornerRadius:(CGFloat)cornerRadius lineDashPattern:(NSArray<NSNumber *> *)lineDashPattern{
     [self layoutIfNeeded];
+    NSString *name = @"SHDashedBorder";
+    for (CAShapeLayer *obj in self.layer.sublayers) {
+        if ([obj isKindOfClass:[CAShapeLayer class]]) {
+            if ([obj.name isEqualToString:name]) {
+                [obj removeFromSuperlayer];
+            }
+        }
+    }
+    
     CAShapeLayer *border = [CAShapeLayer layer];
+    border.name = name;
     border.strokeColor = lineColor.CGColor;
     border.fillColor = nil;
     border.path = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(cornerRadius, cornerRadius)].CGPath;
@@ -261,7 +271,17 @@ static UIPanGestureRecognizer *_panGesture;
 #pragma mark 绘制虚线
 - (void)drawDashed:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth lineDashPattern:(NSArray<NSNumber *> *)lineDashPattern isHorizonal:(BOOL)isHorizonal{
     [self layoutIfNeeded];
+    NSString *name = @"SHDashed";
+    for (CAShapeLayer *obj in self.layer.sublayers) {
+        if ([obj isKindOfClass:[CAShapeLayer class]]) {
+            if ([obj.name isEqualToString:name]) {
+                [obj removeFromSuperlayer];
+            }
+        }
+    }
+    
     CAShapeLayer *border = [CAShapeLayer layer];
+    border.name = name;
     border.bounds = self.bounds;
 
     border.fillColor = nil;
