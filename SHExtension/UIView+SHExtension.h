@@ -82,7 +82,7 @@ IBInspectable
 /// @param lineColor 颜色
 /// @param lineWidth 宽度
 /// @param lineDashPattern @[线长、线间隔]
-- (void)drawDashedBorder:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth lineDashPattern:(NSArray<NSNumber *> *)lineDashPattern;
+- (void)drawDashedBorder:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth cornerRadius:(CGFloat)cornerRadius lineDashPattern:(NSArray<NSNumber *> *)lineDashPattern;
 
 #pragma mark 绘制虚线
 /// 绘制虚线

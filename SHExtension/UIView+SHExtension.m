@@ -245,12 +245,12 @@ static UIPanGestureRecognizer *_panGesture;
 }
 
 #pragma mark 虚线边框
-- (void)drawDashedBorder:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth lineDashPattern:(NSArray<NSNumber *> *)lineDashPattern{
+- (void)drawDashedBorder:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth cornerRadius:(CGFloat)cornerRadius lineDashPattern:(NSArray<NSNumber *> *)lineDashPattern{
     [self layoutIfNeeded];
     CAShapeLayer *border = [CAShapeLayer layer];
     border.strokeColor = lineColor.CGColor;
     border.fillColor = nil;
-    border.path = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
+    border.path = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(cornerRadius, cornerRadius)].CGPath;
     border.frame = self.bounds;
     border.lineWidth = lineWidth;
     border.lineCap = @"square";

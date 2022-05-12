@@ -50,7 +50,7 @@
     UIView *view = [[UIView alloc]init];
     view.size = CGSizeMake(100, 100);
     view.backgroundColor = [UIColor redColor];
-    [view drawDashedBorder:[UIColor blueColor] lineWidth:1 lineDashPattern:@[@(5),@(5)]];
+    [view drawDashedBorder:[UIColor blueColor] lineWidth:1 cornerRadius:4 lineDashPattern:@[@(5),@(5)]];
     [view drawDashed:[UIColor orangeColor] lineWidth:10 lineDashPattern:@[@(5),@(5)] isHorizonal:NO];
     [self.view addSubview:view];
     view.dragEdge = UIEdgeInsetsMake(10, 10, 10, 10);
