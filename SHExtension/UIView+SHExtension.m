@@ -120,12 +120,12 @@ static UIPanGestureRecognizer *_panGesture;
 #pragma mark 通过视图获取一张图片
 - (UIImage *)sh_img {
     UIGraphicsBeginImageContextWithOptions(self.size, NO, 0);
-    
+
     [self.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    
+
     UIGraphicsEndImageContext();
-    
+
     return image;
 }
 
@@ -185,7 +185,7 @@ static UIPanGestureRecognizer *_panGesture;
                 if (self.maxX > self.superview.maxX - _dragEdge.right) {
                     x = self.superview.maxX - _dragEdge.right - self.width;
                 }
-                
+
                 // Y轴
                 if (self.y < _dragEdge.top) {
                     y = _dragEdge.top;
@@ -193,11 +193,11 @@ static UIPanGestureRecognizer *_panGesture;
                 if (self.maxY > self.superview.maxY - _dragEdge.bottom) {
                     y = self.superview.maxY - _dragEdge.bottom - self.height;
                 }
-                
+
                 [UIView animateWithDuration:0.1
                                  animations:^{
-                    self.origin = CGPointMake(x, y);
-                }];
+                                   self.origin = CGPointMake(x, y);
+                                 }];
             }
         } break;
         default:
@@ -213,13 +213,13 @@ static UIPanGestureRecognizer *_panGesture;
 #pragma mark 按照图片剪裁视图
 - (void)setClippingImage:(UIImage *)clippingImage {
     dispatch_async(dispatch_get_main_queue(), ^{
-        CALayer *maskLayer = [CALayer layer];
-        maskLayer.frame = self.bounds;
-        
-        [maskLayer setContents:(id)clippingImage.CGImage];
-        [maskLayer setContentsScale:clippingImage.scale];
-        
-        self.layer.mask = maskLayer;
+      CALayer *maskLayer = [CALayer layer];
+      maskLayer.frame = self.bounds;
+
+      [maskLayer setContents:(id)clippingImage.CGImage];
+      [maskLayer setContentsScale:clippingImage.scale];
+
+      self.layer.mask = maskLayer;
     });
 }
 
@@ -236,11 +236,54 @@ static UIPanGestureRecognizer *_panGesture;
 }
 
 - (void)borderRadius:(CGFloat)radius corners:(UIRectCorner)corners {
+    [self layoutIfNeeded];
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:self.bounds byRoundingCorners:corners cornerRadii:CGSizeMake(radius, radius)];
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.frame = self.bounds;
     maskLayer.path = maskPath.CGPath;
     self.layer.mask = maskLayer;
+}
+
+#pragma mark 虚线边框
+- (void)drawDashedBorder:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth lineDashPattern:(NSArray<NSNumber *> *)lineDashPattern{
+    [self layoutIfNeeded];
+    CAShapeLayer *border = [CAShapeLayer layer];
+    border.strokeColor = lineColor.CGColor;
+    border.fillColor = nil;
+    border.path = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
+    border.frame = self.bounds;
+    border.lineWidth = lineWidth;
+    border.lineCap = @"square";
+    border.lineDashPattern = lineDashPattern;
+    [self.layer addSublayer:border];
+}
+
+#pragma mark 绘制虚线
+- (void)drawDashed:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth lineDashPattern:(NSArray<NSNumber *> *)lineDashPattern isHorizonal:(BOOL)isHorizonal{
+    [self layoutIfNeeded];
+    CAShapeLayer *border = [CAShapeLayer layer];
+    border.bounds = self.bounds;
+
+    border.fillColor = nil;
+    border.strokeColor = lineColor.CGColor;
+    
+    border.lineWidth = lineWidth;
+    border.lineJoin = kCALineJoinRound;
+    border.lineDashPattern = lineDashPattern;
+
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, 0, 0);
+    if (isHorizonal) {
+        border.position = CGPointMake(CGRectGetWidth(self.frame) / 2, CGRectGetHeight(self.frame));
+        CGPathAddLineToPoint(path, NULL, CGRectGetWidth(self.frame), 0);
+    } else {
+        border.position = CGPointMake(CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) / 2);
+        CGPathAddLineToPoint(path, NULL, 0, CGRectGetHeight(self.frame));
+    }
+    border.path = path;
+
+    CGPathRelease(path);
+    [self.layer addSublayer:border];
 }
 
 #pragma mark - 获取一个渐变色的视图
@@ -252,44 +295,44 @@ static UIPanGestureRecognizer *_panGesture;
     gradientLayer.frame = view.bounds;
     //  创建渐变色数组，需要转换为CGColor颜色
     gradientLayer.colors = colorArr;
-    
+
     //  设置渐变颜色方向，左上点为(0,0), 右下点为(1,1)
     gradientLayer.startPoint = startPoint;
     gradientLayer.endPoint = endPoint;
-    
+
     // 设置渐变位置
     CGFloat loc = 1.0 / (colorArr.count - 1);
     NSMutableArray *location = [[NSMutableArray alloc] init];
     [location addObject:@0];
     NSInteger index = 1;
-    
+
     while (index != colorArr.count) {
         [location addObject:[NSNumber numberWithFloat:index * loc]];
         index++;
     }
-    
+
     //设置颜色变化点，取值范围 0.0~1.0
     gradientLayer.locations = location;
-    
+
     [view.layer addSublayer:gradientLayer];
-    
+
     return view;
 }
 
 #pragma mark 按照图片裁剪视图
 - (void)makeMaskViewWithImage:(UIImage *)image {
     dispatch_async(dispatch_get_main_queue(), ^{
-        CALayer *maskLayer = [CALayer layer];
-        maskLayer.frame = self.bounds;
-        //把视图设置成图片的样子
-        [maskLayer setContents:(id)image.CGImage];
-        [maskLayer setContentsScale:image.scale];
-        [maskLayer setContentsCenter:CGRectMake(((image.size.width / 2) - 1) / image.size.width,
-                                                ((image.size.height / 1.5) - 1) / image.size.height,
-                                                1 / image.size.width,
-                                                1 / image.size.height)];
-        
-        self.layer.mask = maskLayer;
+      CALayer *maskLayer = [CALayer layer];
+      maskLayer.frame = self.bounds;
+      //把视图设置成图片的样子
+      [maskLayer setContents:(id)image.CGImage];
+      [maskLayer setContentsScale:image.scale];
+      [maskLayer setContentsCenter:CGRectMake(((image.size.width / 2) - 1) / image.size.width,
+                                              ((image.size.height / 1.5) - 1) / image.size.height,
+                                              1 / image.size.width,
+                                              1 / image.size.height)];
+
+      self.layer.mask = maskLayer;
     });
 }
 
@@ -393,9 +436,9 @@ static UIPanGestureRecognizer *_panGesture;
 #pragma mark 阴影位置
 - (void)setShadowType:(SHViewShadowType)shadowType {
     CGRect frame = self.bounds;
-    
+
     CGFloat space = self.shadowRadius / 4;
-    
+
     switch (shadowType) {
         case SHViewShadowType_top: {
             frame = CGRectMake(space, -self.shadowRadius / 2, self.width - 2 * space, self.shadowRadius);
@@ -412,7 +455,7 @@ static UIPanGestureRecognizer *_panGesture;
         default:
             break;
     }
-    
+
     self.shadowPath = [UIBezierPath bezierPathWithRect:frame].CGPath;
 }
 

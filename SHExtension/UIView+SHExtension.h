@@ -77,6 +77,20 @@ IBInspectable
 - (void)borderRadius:(CGFloat)radius;
 - (void)borderRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color;
 - (void)borderRadius:(CGFloat)radius corners:(UIRectCorner)corners;
+#pragma mark 虚线边框
+/// 虚线边框
+/// @param lineColor 颜色
+/// @param lineWidth 宽度
+/// @param lineDashPattern @[线长、线间隔]
+- (void)drawDashedBorder:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth lineDashPattern:(NSArray<NSNumber *> *)lineDashPattern;
+
+#pragma mark 绘制虚线
+/// 绘制虚线
+/// @param lineColor 颜色
+/// @param lineWidth 宽度
+/// @param lineDashPattern @[线长、线间隔]
+/// @param isHorizonal 是否水平
+- (void)drawDashed:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth lineDashPattern:(NSArray<NSNumber *> *)lineDashPattern isHorizonal:(BOOL)isHorizonal;
 
 #pragma mark - 获取一个渐变色的视图
 + (UIView *)getGradientViewWithSize:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint colorArr:(NSArray *)colorArr;

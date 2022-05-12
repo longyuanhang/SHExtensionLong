@@ -44,14 +44,16 @@
     NSString *str = [SHTool getInstantTimeWithMs:@"1610672356291"];
     NSLog(@"===%@",str);
     
-    str = [SHTool handleTime:@"01:01:01" format: NSCalendarUnitMinute | NSCalendarUnitSecond];
+    str = [SHTool handleTime:@"01:01:01" format:NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond];
     NSLog(@"===%@",str);
     
     UIView *view = [[UIView alloc]init];
     view.size = CGSizeMake(100, 100);
     view.backgroundColor = [UIColor redColor];
+    [view drawDashedBorder:[UIColor blueColor] lineWidth:1 lineDashPattern:@[@(5),@(5)]];
+    [view drawDashed:[UIColor orangeColor] lineWidth:10 lineDashPattern:@[@(5),@(5)] isHorizonal:NO];
     [self.view addSubview:view];
-    view.dragEdge = UIEdgeInsetsMake(10, 10, -10, -10);
+    view.dragEdge = UIEdgeInsetsMake(10, 10, 10, 10);
 //    view.dragBlock = ^(UIView * _Nonnull dragView) {
 //        [UIView animateWithDuration:0.1 animations:^{
 //            dragView.x = kSHWidth - view.width - 10;
