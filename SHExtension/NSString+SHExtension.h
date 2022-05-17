@@ -37,6 +37,11 @@ NS_ASSUME_NONNULL_BEGIN
 //64解码
 @property (nonatomic, copy, readonly) NSString *decoded64;
 
+//unicode编码
+@property (nonatomic, copy, readonly) NSString *unicode;
+//unicode解码
+@property (nonatomic, copy, readonly) NSString *unicodeStr;
+
 #pragma mark - AES-CBC
 #pragma mark AES128-CBC-NoPadding 加密
 - (NSString *)AES128EncryptWithKey:(NSString *)key iv:(NSString *)iv;

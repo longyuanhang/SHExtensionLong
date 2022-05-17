@@ -28,6 +28,7 @@
     // Do any additional setup after loading the view, typically from a nib.
     NSLog(@"表情===%i",@"哈哈😄".isEmoji);
 
+    NSLog(@"====%@",[[@"哈哈" unicode] unicodeStr]);
     
     [[UIImage imageNamed:@"1.jpeg"] imageCompressionWithByte:10*1024];
     
