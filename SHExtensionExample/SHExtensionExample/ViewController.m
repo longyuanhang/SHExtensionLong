@@ -74,6 +74,9 @@
     view1.backgroundColor = [UIColor greenColor];
     [self.view addSubview:view1];
     [view1 makeMaskViewWithImage:[UIImage imageNamed:@"2.png"]];
+    view1.clickBlock = ^(UITapGestureRecognizer * _Nonnull tap) {
+        NSLog(@"点击了！！！！！！！！！！！！");
+    };
     
     UIView *view2 = [[UIView alloc]init];
     view2.frame = CGRectMake(150, 250, 100, 50);

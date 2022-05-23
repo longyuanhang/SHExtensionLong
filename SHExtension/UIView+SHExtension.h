@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 //回调 拖拽结束
 typedef void (^DragBlock)(UIView *dragView);
+//回调 点击
+typedef void(^ClickBlock)(UITapGestureRecognizer *tap);
 
 //阴影位置
 typedef enum : NSUInteger {
@@ -25,10 +27,7 @@ typedef enum : NSUInteger {
     SHViewShadowType_right,
 } SHViewShadowType;
 
-IBInspectable
-
-    @interface
-    UIView(SHExtension)
+IBInspectable @interface UIView(SHExtension)
 
 #pragma mark - frame
 // X轴
@@ -69,6 +68,9 @@ IBInspectable
 
 //按照图片剪裁视图
 @property (nonatomic, strong) UIImage *clippingImage;
+
+//点击回调
+@property (nonatomic, copy) ClickBlock clickBlock;
 
 #pragma mark - 关闭拖拽
 - (void)closeDrag;

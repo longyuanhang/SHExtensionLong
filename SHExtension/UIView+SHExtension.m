@@ -15,6 +15,7 @@ static UIEdgeInsets _dragEdge;
 static DragBlock _dragBlock;
 static DragBlock _dragingBlock;
 static UIPanGestureRecognizer *_panGesture;
+static ClickBlock _clickBlock;
 
 #pragma mark - frame
 - (void)setX:(CGFloat)x {
@@ -360,6 +361,19 @@ static UIPanGestureRecognizer *_panGesture;
 - (id)copy_obj:(id)obj {
     NSData *temp = [NSKeyedArchiver archivedDataWithRootObject:obj];
     return [NSKeyedUnarchiver unarchiveObjectWithData:temp];
+}
+
+#pragma mark 添加点击
+- (void)setClickBlock:(ClickBlock)clickBlock{
+    _clickBlock = clickBlock;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+    [self addGestureRecognizer:tap];
+}
+
+- (void)tapAction:(UITapGestureRecognizer *)tap{
+    if (_clickBlock) {
+        _clickBlock(tap);
+    }
 }
 
 #pragma mark - xib 属性
