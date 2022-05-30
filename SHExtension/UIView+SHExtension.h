@@ -72,13 +72,14 @@ IBInspectable @interface UIView(SHExtension)
 //点击回调
 @property (nonatomic, copy) ClickBlock clickBlock;
 
-#pragma mark - 关闭拖拽
+#pragma mark 关闭拖拽
 - (void)closeDrag;
 
-#pragma mark - 描边
+#pragma mark 描边
 - (void)borderRadius:(CGFloat)radius;
 - (void)borderRadius:(CGFloat)radius width:(CGFloat)width color:(UIColor *)color;
 - (void)borderRadius:(CGFloat)radius corners:(UIRectCorner)corners;
+
 #pragma mark 虚线边框
 /// 虚线边框
 /// @param lineColor 颜色
@@ -94,7 +95,7 @@ IBInspectable @interface UIView(SHExtension)
 /// @param isHorizonal 是否水平
 - (void)drawDashed:(UIColor *)lineColor lineWidth:(CGFloat)lineWidth lineDashPattern:(NSArray<NSNumber *> *)lineDashPattern isHorizonal:(BOOL)isHorizonal;
 
-#pragma mark - 获取一个渐变色的视图
+#pragma mark 获取一个渐变色的视图
 + (UIView *)getGradientViewWithSize:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint colorArr:(NSArray *)colorArr;
 
 #pragma mark 按照图片裁剪视图

@@ -162,7 +162,8 @@ static ClickBlock _clickBlock;
     }
 }
 
-#pragma mark - 拖拽
+#pragma mark - 私有方法
+#pragma mark 拖拽
 - (void)panAction:(UIPanGestureRecognizer *)pan {
     switch (pan.state) {
         case UIGestureRecognizerStateChanged: {
@@ -206,11 +207,6 @@ static ClickBlock _clickBlock;
     }
 }
 
-#pragma mark 关闭拖拽
-- (void)closeDrag {
-    [self removeGestureRecognizer:_panGesture];
-}
-
 #pragma mark 按照图片剪裁视图
 - (void)setClippingImage:(UIImage *)clippingImage {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -224,7 +220,26 @@ static ClickBlock _clickBlock;
     });
 }
 
-#pragma mark - 描边
+#pragma mark 添加点击
+- (void)setClickBlock:(ClickBlock)clickBlock{
+    _clickBlock = clickBlock;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+    [self addGestureRecognizer:tap];
+}
+
+- (void)tapAction:(UITapGestureRecognizer *)tap{
+    if (_clickBlock) {
+        _clickBlock(tap);
+    }
+}
+
+#pragma mark - 公开方法
+#pragma mark 关闭拖拽
+- (void)closeDrag {
+    [self removeGestureRecognizer:_panGesture];
+}
+
+#pragma mark 描边
 - (void)borderRadius:(CGFloat)radius {
     [self borderRadius:radius width:0 color:[UIColor clearColor]];
 }
@@ -307,7 +322,7 @@ static ClickBlock _clickBlock;
     [self.layer addSublayer:border];
 }
 
-#pragma mark - 获取一个渐变色的视图
+#pragma mark 获取一个渐变色的视图
 + (UIView *)getGradientViewWithSize:(CGSize)size startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint colorArr:(NSArray *)colorArr {
     UIView *view = [[UIView alloc] init];
     view.size = size;
@@ -361,19 +376,6 @@ static ClickBlock _clickBlock;
 - (id)copy_obj:(id)obj {
     NSData *temp = [NSKeyedArchiver archivedDataWithRootObject:obj];
     return [NSKeyedUnarchiver unarchiveObjectWithData:temp];
-}
-
-#pragma mark 添加点击
-- (void)setClickBlock:(ClickBlock)clickBlock{
-    _clickBlock = clickBlock;
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
-    [self addGestureRecognizer:tap];
-}
-
-- (void)tapAction:(UITapGestureRecognizer *)tap{
-    if (_clickBlock) {
-        _clickBlock(tap);
-    }
 }
 
 #pragma mark - xib 属性

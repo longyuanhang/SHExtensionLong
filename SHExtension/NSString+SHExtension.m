@@ -181,6 +181,23 @@
     return att.string;
 }
 
+#pragma mark 获取所有字符串出现范围
+- (NSArray *)rangesOfString:(NSString *)obj{
+    NSMutableArray *rangeArr = [[NSMutableArray alloc]init];
+    NSString *temp = self;
+    NSInteger lenght = 0;
+    while ([temp containsString:obj]) {
+        NSRange range = [temp rangeOfString:obj];
+        //去掉
+        temp = [temp stringByReplacingCharactersInRange:range withString:@""];
+        //设置位置 + 去掉的长度
+        range = NSMakeRange(range.location + lenght, range.length);
+        [rangeArr addObject:[NSValue valueWithRange:range]];
+        lenght += obj.length;
+    }
+    return [rangeArr copy];
+}
+
 #pragma mark - AES-CBC
 #pragma mark AES128-CBC-NoPadding 加密
 - (NSString *)AES128EncryptWithKey:(NSString *)key iv:(NSString *)iv {

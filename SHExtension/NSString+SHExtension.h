@@ -42,6 +42,10 @@ NS_ASSUME_NONNULL_BEGIN
 //unicode解码
 @property (nonatomic, copy, readonly) NSString *unicodeStr;
 
+
+#pragma mark 获取所有字符串出现范围
+- (NSArray *)rangesOfString:(NSString *)obj;
+
 #pragma mark - AES-CBC
 #pragma mark AES128-CBC-NoPadding 加密
 - (NSString *)AES128EncryptWithKey:(NSString *)key iv:(NSString *)iv;
