@@ -11,7 +11,7 @@
 @implementation UIColor (SHExtension)
 
 #pragma mark 16进制颜色
-+ (UIColor *)colorWithHexString:(NSString *)hexString{
++ (UIColor *)sh_colorWithHexString:(NSString *)hexString{
     
     CGFloat alpha = 0.0, red = 0.0, blue = 0.0, green = 0.0;
     

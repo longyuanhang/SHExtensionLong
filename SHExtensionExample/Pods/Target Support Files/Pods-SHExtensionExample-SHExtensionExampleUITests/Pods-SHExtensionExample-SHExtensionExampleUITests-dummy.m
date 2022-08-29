@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_SHExtensionExample_SHExtensionExampleUITests : NSObject
+@end
+@implementation PodsDummy_Pods_SHExtensionExample_SHExtensionExampleUITests
+@end

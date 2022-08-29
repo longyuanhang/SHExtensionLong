@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) NSArray *rgbArr;
 
 #pragma mark 16进制颜色
-+ (UIColor *)colorWithHexString:(NSString *)hexString;
++ (UIColor *)sh_colorWithHexString:(NSString *)hexString;
 
 #pragma mark 获取两种颜色的过渡色
 + (UIColor *)getTransitionColorWithStartColor:(UIColor *)startColor endColor:(UIColor *)endColor scale:(CGFloat)scale;
